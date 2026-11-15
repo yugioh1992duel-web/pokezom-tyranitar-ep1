@@ -7,7 +7,11 @@ template = open(os.path.join(B, 'template/index.html')).read()
 GOLD = {"600","700","hundred","rocket","jet","engine","loading","dark","mega","mountain","mountains","maps","dubious","billion","fifty-five","55","shadow","parents","cocoon","robot","machine","redrawn"}
 
 def captions(start, end):
-    ws = [w for w in words if start <= w['s'] < end]
+    # 'Subscribe,' at ~451.9s is a second-pass transcription insertion, not in the
+    # take (verified against the first transcript + the user's record). Captions
+    # must match the audio, so it is excluded here. Audio itself is never touched.
+    ws = [w for w in words if start <= w['s'] < end
+          and not (w['w'].strip('.,!?').lower() == 'subscribe' and w['s'] > 450)]
     chunks, cur = [], []
     for w in ws:
         cur.append(w)
@@ -89,7 +93,7 @@ SEGS = [
                           for i, (a, n) in enumerate([("Larvitar","LARVITAR"),("Pupitar","PUPITAR"),("Shadow_Tyranitar","SHADOW"),("Iron_Thorns","IRON THORNS"),("Tyranitar","TYRANITAR"),("Mega_Tyranitar","MEGA TYRANITAR")])],
                "hits": [{"idx": i, "t": t} for i, t in enumerate([3.08, 7.02, 12.56, 19.20, 25.36, 28.90])]},
       headlines=[hl(35.0, "YOUR TURN — <span class='gold'>VOTE BELOW!</span>", 45.3, x=480, y=130, size=84)],
-      chips=[chip(45.5, "NEXT EPISODE: <span class='gold'>EVERY DRAGONITE</span>", 51.6, x=620, y=950)]),
+      chips=[chip(45.5, "NEXT EPISODE: <span class='gold'>EVERY DRAGONITE</span>", 51.6, x=620, y=790)]),
 ]
 
 for cfg in SEGS:
