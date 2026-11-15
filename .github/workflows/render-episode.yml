@@ -1,0 +1,51 @@
+# Pokezom episode render — GitHub Actions (adopted Nov 15, 2026)
+# Private repo (build contains VO + anime clips).
+# Private-repo standard runner: 2 vCPU / 8 GB RAM, ~2,000 free min/mo (GitHub Free).
+# Assembly (concat + audio mix + QC) is done locally after artifacts are pulled.
+name: render-episode
+on:
+  workflow_dispatch:
+    inputs:
+      sections:
+        description: 'JSON array of sections to render (trial: ["s0"])'
+        required: true
+        default: '["s0","s1","s2","s3","s4","s5","s6","s7","s8"]'
+jobs:
+  render-sections:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        section: ${{ fromJSON(inputs.sections) }}
+    steps:
+      - name: Free disk space
+        run: |
+          df -h /
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/local/.ghcup
+          df -h /
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache
+            ~/.npm
+          key: hf-0.8.217-${{ runner.os }}
+      - name: Render section
+        working-directory: segments/${{ matrix.section }}
+        env:
+          TMPDIR: /tmp
+          HF_SEGMENTED_CAPTURE: "true"
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+        run: npx --yes hyperframes@0.8.217 render --resume
+      - uses: actions/upload-artifact@v4
+        with:
+          name: section-${{ matrix.section }}
+          path: |
+            segments/${{ matrix.section }}/renders/*/video-only.mp4
+            segments/${{ matrix.section }}/renders/*.mp4
+          if-no-files-found: error
+          retention-days: 1

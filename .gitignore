@@ -1,0 +1,10 @@
+segments/*/renders/
+segments/*/.hyperframes/
+segments/*/render.log
+render_all.log
+main_raw.wav
+vo_spliced_trimmed.wav
+vo_spliced_raw.wav
+vo_preview_trimmed.mp3
+vo_final_preview.mp3
+github_test/

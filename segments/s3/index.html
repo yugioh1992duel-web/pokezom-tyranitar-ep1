@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1920px; height:1080px; overflow:hidden; background:#05070f;
+    font-family:"Noto Sans Display","Arial",sans-serif; }
+  #root { position:absolute; inset:0; overflow:hidden; }
+  #sky { position:absolute; inset:0; }
+  #glowC { position:absolute; left:50%; top:46%; width:1500px; height:900px;
+    transform:translate(-50%,-50%); border-radius:50%; }
+  #deep { position:absolute; inset:0; }
+  .aurora { position:absolute; left:-15%; width:130%; height:300px; border-radius:50%;
+    filter:blur(50px); opacity:.5; }
+  .mote { position:absolute; border-radius:50%; pointer-events:none; }
+  .m-ring { background:transparent !important; border:3px solid; }
+  .m-leaf { border-radius:80% 4px 80% 4px !important; }
+  .m-gem { border-radius:4px !important; transform:rotate(45deg); }
+  .m-star { clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%); border-radius:0 !important; }
+  .cloud { position:absolute; border-radius:50%; filter:blur(38px); background:rgba(16,20,38,.82); }
+  #vignette { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 44%, transparent 52%, rgba(0,0,0,.5) 100%); }
+  /* header */
+  #formChip { position:absolute; left:56px; top:44px; z-index:40; padding:12px 26px;
+    border-radius:999px; background:rgba(6,10,24,.66); border:1.5px solid rgba(255,255,255,.28);
+    color:#fff; font-weight:800; font-size:27px; letter-spacing:3px; opacity:0; }
+  #formChip .gold { color:#ffd94d; }
+  #brandChip { position:absolute; right:56px; top:44px; z-index:40; padding:12px 26px;
+    border-radius:999px; background:rgba(6,10,24,.5); border:1.5px solid rgba(255,255,255,.16);
+    color:rgba(255,255,255,.75); font-weight:700; font-size:22px; letter-spacing:3px; opacity:0; }
+  /* heroes */
+  .heroPlate { position:absolute; z-index:12; }
+  .heroPlate img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  .heroGlow { position:absolute; border-radius:50%; filter:blur(46px); z-index:11; }
+  .pool { position:absolute; border-radius:50%; filter:blur(30px); z-index:10; }
+  /* name block */
+  #nameBlock { position:absolute; left:70px; top:300px; width:760px; z-index:30; opacity:0; }
+  #pokeName { font-size:104px; font-weight:900; letter-spacing:1px; line-height:1.02;
+    background:linear-gradient(180deg,#ffffff 15%,#cfd8ea 48%,#8d99b5 52%,#e8eefc 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 6px 22px rgba(0,0,0,.55)); }
+  #pokeSub { margin-top:10px; font-size:34px; font-weight:700; color:rgba(255,255,255,.82); letter-spacing:1px; }
+  #pillRow { display:flex; gap:14px; margin-top:26px; }
+  .pill { padding:12px 30px; border-radius:999px; color:#fff; font-weight:800; font-size:27px;
+    letter-spacing:2.5px; border:1.5px solid rgba(255,255,255,.4);
+    box-shadow:0 8px 26px rgba(0,0,0,.45), inset 0 2px 3px rgba(255,255,255,.5); text-shadow:0 2px 6px rgba(0,0,0,.4); }
+  /* headlines */
+  .headline { position:absolute; z-index:32; font-weight:900; text-align:left;
+    background:linear-gradient(180deg,#fff6d8 10%,#ffd94d 45%,#c99300 55%,#ffe98a 92%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 8px 26px rgba(0,0,0,.6)); opacity:0; line-height:1.05; }
+  .headline.silver { background:linear-gradient(180deg,#ffffff 15%,#cfd8ea 48%,#8d99b5 52%,#e8eefc 90%);
+    -webkit-background-clip:text; background-clip:text; }
+  /* chips */
+  .chip { position:absolute; z-index:34; padding:14px 30px; border-radius:16px;
+    background:rgba(8,12,28,.78); border:1.5px solid rgba(255,255,255,.3);
+    color:#fff; font-weight:800; font-size:31px; letter-spacing:1.5px; opacity:0;
+    box-shadow:0 12px 34px rgba(0,0,0,.5); }
+  .chip .gold { color:#ffd94d; } .chip .red { color:#ff7a7a; } .chip .grn { color:#8dffa8; }
+  .chip .pur { color:#cfa6ff; }
+  /* quote card */
+  #quoteCard { position:absolute; left:70px; top:545px; width:1010px; z-index:36; opacity:0; background:rgba(10,16,14,.88); border:2px solid rgba(120,255,170,.35);
+    border-radius:24px; padding:44px 54px; box-shadow:0 30px 80px rgba(0,0,0,.65); }
+  #quoteHead { display:inline-block; padding:8px 20px; border-radius:8px; background:#1d3a2a;
+    color:#8dffa8; font-weight:800; font-size:23px; letter-spacing:3px; margin-bottom:22px; }
+  #quoteText { color:#eafff0; font-size:44px; font-weight:700; line-height:1.35; }
+  #quoteSrc { margin-top:20px; color:rgba(255,255,255,.55); font-size:24px; font-weight:600; letter-spacing:1px; }
+  /* clip stacks */
+  .clipFull { position:absolute; inset:0; z-index:20; opacity:0; }
+  .clipFull img, .clipFramed img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; }
+  .clipFull img:first-child, .clipFramed img:first-child { opacity:1; }
+  .clipFramed { position:absolute; z-index:22; border-radius:22px; overflow:hidden; opacity:0;
+    border:2px solid rgba(255,255,255,.35); box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  .clipTag { position:absolute; z-index:23; padding:9px 20px; border-radius:999px;
+    background:rgba(4,6,16,.72); border:1.5px solid rgba(255,255,255,.3); color:#fff;
+    font-size:21px; font-weight:700; letter-spacing:2px; opacity:0; }
+  #clipVeil { position:absolute; inset:0; z-index:21; background:rgba(2,4,10,.34); opacity:0; }
+  /* captions */
+  #capWrap { position:absolute; left:0; right:0; bottom:44px; height:90px; z-index:60; }
+  .cap { position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:max-content; max-width:1560px; text-align:center; opacity:0; }
+  .capIn { display:inline-block; background:rgba(4,8,22,.55); border:1.5px solid rgba(255,255,255,.15);
+    border-radius:20px; padding:16px 34px; box-shadow:0 14px 40px rgba(0,0,0,.45); }
+  .cap span { display:inline-block; margin-right:13px; font-size:43px; font-weight:800; color:#fff; opacity:0;
+    text-shadow:0 3px 12px rgba(0,0,0,.6); letter-spacing:.4px; }
+  .cap span.g { background:linear-gradient(180deg,#fff6d8 10%,#ffd94d 45%,#c99300 55%,#ffe98a 92%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  /* ranking */
+  .rankSlot { position:absolute; z-index:14; text-align:center; }
+  .rankSlot img { width:100%; height:100%; object-fit:contain; }
+  .rankNum { position:absolute; z-index:15; font-size:120px; font-weight:900; opacity:0;
+    background:linear-gradient(180deg,#fff6d8 10%,#ffd94d 45%,#c99300 55%,#ffe98a 92%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 8px 24px rgba(0,0,0,.65)); }
+  .rankName { position:absolute; z-index:15; width:100%; text-align:center; color:#fff;
+    font-size:29px; font-weight:800; letter-spacing:1.5px; opacity:0; text-shadow:0 3px 10px rgba(0,0,0,.7); }
+  #titleCard { position:absolute; inset:0; z-index:28; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; opacity:0; }
+  #titleBig { font-size:118px; font-weight:900; letter-spacing:2px; text-align:center; line-height:1.04;
+    background:linear-gradient(180deg,#ffffff 15%,#cfd8ea 48%,#8d99b5 52%,#e8eefc 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 10px 34px rgba(0,0,0,.6)); }
+  #titleSub { margin-top:22px; font-size:46px; font-weight:900; letter-spacing:6px;
+    background:linear-gradient(180deg,#fff6d8 10%,#ffd94d 45%,#c99300 55%,#ffe98a 92%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="81.58" data-width="1920" data-height="1080">
+  <div class="clip" data-start="0" data-duration="81.58" data-track-index="0" style="position:absolute;inset:0;">
+    <div id="sky"></div><div id="glowC"></div><div id="deep"></div>
+    <div id="envLayer"></div><div id="motesBack"></div>
+    <div id="stageLayer"></div>
+    <div id="clipLayer"></div><div id="clipVeil"></div>
+    <div id="motesFront"></div><div id="vignette"></div>
+    <div id="formChip"></div><div id="brandChip">EVERY POKÉMON · EXPLAINED &amp; RANKED</div>
+    <div id="nameBlock"><div id="pokeName"></div><div id="pokeSub"></div><div id="pillRow"></div></div>
+    <div id="fxLayer"></div>
+    <div id="quoteCard"><div id="quoteHead">POKÉDEX ENTRY</div><div id="quoteText"></div><div id="quoteSrc"></div></div>
+    <div id="titleCard"><div id="titleBig"></div><div id="titleSub"></div></div>
+    <div id="capWrap"></div>
+  </div>
+</div>
+<script src="assets/gsap.min.js"></script>
+<script>
+const C = {"id": "s3", "start": 146.42, "dur": 81.58, "types": ["Rock", "Dark"], "formLabel": "FORM 3 OF 6", "heroes": [{"art": "Tyranitar.png", "sil": "Tyranitar_sil.png", "x": 1080, "y": 185, "size": 820, "in": 0.3, "silUntil": 0, "idle": [1.5, 999], "punch": 1.2}], "nameBlock": {"name": "TYRANITAR", "sub": "THE ARMOR POK\u00c9MON \u00b7 #248", "pills": ["Rock", "Dark"], "at": 0.6}, "statAnim": {"at": 2.6, "from": 0, "to": 600, "label": "TOTAL STATS", "x": 70, "y": 880, "out": 14.0}, "headlines": [{"at": 23.2, "html": "IT TURNS TO THE<br/><span class='gold'>DARK SIDE</span>", "out": 26.5, "x": 70, "y": 560, "size": 76}], "quoteCard": {"at": 26.8, "text": "If it rampages, it knocks down mountains and buries rivers. Maps must be redrawn afterward.", "src": "POK\u00c9DEX \u2014 DIAMOND \u00b7 PEARL \u00b7 PLATINUM", "out": 38.6}, "chips": [{"at": 41.4, "html": "ABILITY: <span class='gold'>SAND STREAM</span> \u2014 A STORM ON ENTRY", "out": 49.5, "x": 70, "y": 880}], "clips": [{"dir": "seqA", "frames": 288, "at": 68.9, "dur": 12.0, "mode": "full", "label": "CELEBI: VOICE OF THE FOREST (2001)"}], "world": ["Rock", "Dark"], "duration": 81.58, "captions": [[0.0, "Tyranitar, the armor Pok\u00e9mon. 600 total stats, which puts", [0.0, 1.1, 1.22, 1.62, 2.84, 3.34, 3.98, 4.6, 4.7], [4]], [4.9, "it in the pseudo -legendary club, the strongest non", [4.9, 5.1, 5.2, 5.28, 5.56, 6.14, 6.78, 6.9, 7.54], []], [7.8, "-legendary Pok\u00e9mon of its generation.", [7.8, 8.3, 8.48, 9.02, 9.28], []], [10.26, "And notice what changed. Larvitar and pupitar are rock", [10.26, 10.4, 10.76, 11.02, 11.9, 12.22, 12.42, 12.82, 13.04], []], [13.3, "and ground. Tyranitar is rock and dark.", [13.3, 13.58, 14.54, 14.98, 15.32, 15.62, 16.16], [6]], [17.22, "When the cocoon finally breaks, it loses the ground", [17.22, 17.3, 17.4, 17.7, 18.08, 18.74, 18.8, 19.06, 19.34], [2]], [19.54, "type entirely. The mountain doesn't just wake up.", [19.54, 19.78, 20.58, 20.88, 21.04, 21.48, 21.62, 21.84], [3]], [22.46, "It turns to the dark side.", [22.46, 22.58, 22.9, 23.4, 23.5, 23.8], [4]], [24.6, "And the Pok\u00e9dex does not hold back.", [24.6, 24.68, 24.74, 25.12, 25.44, 25.76, 26.0], []], [26.64, "Quote, if it rampages, it knocks down mountains and", [26.64, 27.6, 27.7, 28.06, 29.78, 29.86, 30.12, 30.62, 31.08], [7]], [32.02, "buries rivers. Maps must be redrawn afterward.", [32.02, 32.6, 33.88, 34.48, 34.96, 35.26, 35.92], [2, 5]], [37.46, "They have to redraw the maps.", [37.46, 37.6, 37.82, 38.0, 38.7, 38.9], [5]], [40.06, "Its ability is sandstream. Some is a sandstorm.", [40.06, 40.2, 40.48, 40.72, 41.38, 41.5, 41.64, 41.7], []], [42.32, "The second it enters battle.", [42.32, 42.34, 42.66, 42.84, 43.12], []], [43.9, "No setup, no warning. The weather itself works for", [43.9, 44.04, 44.66, 44.8, 45.4, 45.6, 45.76, 46.32, 46.68], []], [47.0, "Tyranitar. The storm grinds down everything that isn't built", [47.0, 47.92, 48.2, 48.4, 48.9, 49.02, 49.46, 49.74, 50.0], []], [50.14, "for it. And it even makes rock types tougher", [50.14, 50.36, 50.78, 50.82, 50.9, 51.08, 51.32, 51.52, 51.74], []], [52.16, "while it rages. That's why for over 20 years,", [52.16, 52.46, 52.6, 53.56, 53.8, 53.94, 54.22, 54.5, 54.88], []], [55.5, "Tyranitar has been one of the most feared picks", [55.5, 55.86, 56.1, 56.24, 56.4, 56.46, 56.56, 56.72, 57.12], []], [57.46, "in competitive battles. Entire teams are built around this", [57.46, 57.72, 57.92, 58.72, 59.02, 59.32, 59.66, 59.82, 60.06], []], [60.18, "one Pok\u00e9mon's weather. And in the Celebi movie, a", [60.18, 60.54, 61.24, 61.96, 62.16, 62.4, 62.52, 62.88, 63.4], []], [63.42, "villain catches one with a dark ball.", [63.42, 63.62, 63.96, 64.26, 64.44, 64.58, 64.84], [5]], [65.48, "A ball that forces Pok\u00e9mon to turn evil.", [65.48, 65.52, 65.68, 65.84, 66.14, 66.48, 66.8, 67.02], []], [67.76, "And this is what that looks like.", [67.76, 67.9, 68.38, 68.74, 68.98, 69.14, 69.34], []], [70.02, "A Tyranitar that can't hold back, tearing a forest", [70.02, 70.16, 70.62, 70.82, 71.14, 71.28, 71.82, 72.0, 72.32], []], [72.56, "apart, fighting Suikun to a standstill.", [72.56, 73.4, 73.68, 74.2, 74.36, 74.48], []], [75.36, "That's the baseline. That's the normal one.", [75.36, 75.78, 75.88, 76.64, 76.9, 77.18, 77.46], []], [77.84, "Hold on to that, because everything from here is", [77.84, 78.38, 78.56, 78.68, 79.08, 79.28, 79.54, 79.84, 80.08], []], [80.5, "a remix.", [80.5, 80.58], []]]};
+const TYPES = {"Normal": {"pill": ["#d8d6b8", "#a8a77a", "#7d7c52", "#5c5b3a"], "mote": ["m-star", "#ffffff"], "aurora": ["255,240,200", "200,200,180"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffffff", "aura": "255,255,255"}, "world": {"sky": ["#292536", "#1d1a26", "#131020", "#08070f"], "glow": "rgba(200,190,255,.12)", "deep": "rgba(45,40,75,.5)", "env": "void"}}, "Fire": {"pill": ["#ffb066", "#ee8130", "#c85a10", "#96400a"], "mote": ["m-orb", "#ff9a3d"], "aurora": ["255,140,50", "255,80,40"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff9a3d", "aura": "255,154,61"}, "world": {"sky": ["#38150c", "#2b100a", "#1c0a06", "#0d0403"], "glow": "rgba(255,130,50,.16)", "deep": "rgba(80,20,5,.5)", "env": "ember"}}, "Water": {"pill": ["#a8c8ff", "#6390f0", "#3a68c8", "#2a4c96"], "mote": ["m-ring", "#a8dcff"], "aurora": ["90,160,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#a8dcff", "aura": "168,220,255"}, "world": {"sky": ["#0d4266", "#093049", "#051e33", "#020c18"], "glow": "rgba(90,200,255,.17)", "deep": "rgba(2,24,48,.55)", "env": "sea"}}, "Electric": {"pill": ["#ffe066", "#f7d02c", "#d9a400", "#a87e00"], "mote": ["m-spark", "#ffd94d"], "aurora": ["255,217,77", "255,170,0"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ffd94d", "aura": "255,217,77"}, "world": {"sky": ["#262262", "#1b1a52", "#121240", "#070722"], "glow": "rgba(140,130,255,.18)", "deep": "rgba(40,40,120,.5)", "env": "storm"}}, "Grass": {"pill": ["#b5e48c", "#7ac74c", "#57a02e", "#3f7a20"], "mote": ["m-leaf", "#7ee787"], "aurora": ["140,230,140", "90,200,160"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#7ee787", "aura": "126,231,135"}, "world": {"sky": ["#14351f", "#0f2a19", "#081c10", "#040f08"], "glow": "rgba(110,255,160,.13)", "deep": "rgba(10,50,25,.5)", "env": "void"}}, "Ice": {"pill": ["#d8f4f2", "#96d9d6", "#64b8b4", "#478a88"], "mote": ["m-gem", "#bfefff"], "aurora": ["170,240,255", "140,200,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#bfefff", "aura": "191,239,255"}, "world": {"sky": ["#123446", "#0e2a3a", "#081c29", "#040e16"], "glow": "rgba(170,230,255,.18)", "deep": "rgba(20,60,90,.5)", "env": "void"}}, "Fighting": {"pill": ["#f08078", "#c22e28", "#96201c", "#6e1613"], "mote": ["m-orb", "#ff6b4a"], "aurora": ["255,110,70", "220,60,50"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#ff6b4a", "aura": "255,107,74"}, "world": {"sky": ["#381c0d", "#2b1509", "#1c0d05", "#0e0603"], "glow": "rgba(255,150,80,.14)", "deep": "rgba(70,35,10,.5)", "env": "void"}}, "Poison": {"pill": ["#d88fd8", "#a33ea1", "#7c2a7c", "#5a1d5a"], "mote": ["m-ring", "#c77dff"], "aurora": ["199,125,255", "140,80,220"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#c77dff", "aura": "199,125,255"}, "world": {"sky": ["#2a1242", "#1e0f2e", "#130826", "#08040f"], "glow": "rgba(190,110,255,.15)", "deep": "rgba(50,15,90,.5)", "env": "void"}}, "Ground": {"pill": ["#f2dd9a", "#e2bf65", "#c09e42", "#8f742e"], "mote": ["m-orb", "#e8cc7a"], "aurora": ["240,210,130", "210,170,90"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8cc7a", "aura": "232,204,122"}, "world": {"sky": ["#33200f", "#241708", "#170d05", "#0b0603"], "glow": "rgba(255,200,110,.13)", "deep": "rgba(70,45,15,.5)", "env": "void"}}, "Flying": {"pill": ["#d3c6ff", "#a98ff3", "#8266d8", "#5f45ab"], "mote": ["m-leaf", "#e8f4ff"], "aurora": ["190,200,255", "150,220,255"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#e8f4ff", "aura": "232,244,255"}, "world": {"sky": ["#16304f", "#10233d", "#0a1729", "#050b14"], "glow": "rgba(150,200,255,.16)", "deep": "rgba(25,55,100,.5)", "env": "void"}}, "Psychic": {"pill": ["#ff9ebb", "#f95587", "#d12c64", "#9c1f49"], "mote": ["m-orb", "#ff8fb8"], "aurora": ["255,120,180", "190,90,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff8fb8", "aura": "255,143,184"}, "world": {"sky": ["#33163f", "#260f33", "#180a24", "#0b0512"], "glow": "rgba(255,140,220,.15)", "deep": "rgba(70,20,100,.5)", "env": "void"}}, "Bug": {"pill": ["#d4e86a", "#a6b91a", "#7f9112", "#5c6a0c"], "mote": ["m-orb", "#d8f76a"], "aurora": ["200,240,110", "140,220,120"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#d8f76a", "aura": "216,247,106"}, "world": {"sky": ["#1a3312", "#12260e", "#0a1a07", "#050d04"], "glow": "rgba(170,255,120,.13)", "deep": "rgba(20,55,15,.5)", "env": "canopy"}}, "Rock": {"pill": ["#ddd29a", "#b6a136", "#8f7d24", "#665a1a"], "mote": ["m-gem", "#cfc48a"], "aurora": ["210,195,140", "170,155,100"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#cfc48a", "aura": "207,196,138"}, "world": {"sky": ["#2c2417", "#201a12", "#140f09", "#0a0705"], "glow": "rgba(220,190,130,.12)", "deep": "rgba(60,48,28,.5)", "env": "void"}}, "Ghost": {"pill": ["#b3a1d6", "#735797", "#553f73", "#3d2c54"], "mote": ["m-orb", "#b18cff"], "aurora": ["150,110,230", "110,80,200"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#b18cff", "aura": "177,140,255"}, "world": {"sky": ["#20133c", "#160f2b", "#0e0820", "#06040f"], "glow": "rgba(150,120,255,.16)", "deep": "rgba(35,20,80,.5)", "env": "void"}}, "Dragon": {"pill": ["#b394ff", "#7d55e0", "#5530b8", "#3f2094"], "mote": ["m-orb", "#57f7d6"], "aurora": ["96,80,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#57f7d6", "aura": "87,247,214"}, "world": {"sky": ["#232c58", "#1a2350", "#121a40", "#070b1e"], "glow": "rgba(120,130,255,.20)", "deep": "rgba(50,60,140,.5)", "env": "void"}}, "Dark": {"pill": ["#a08b78", "#705746", "#544134", "#3a2d24"], "mote": ["m-orb", "#8a7fd6"], "aurora": ["110,95,180", "70,60,130"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#8a7fd6", "aura": "138,127,214"}, "world": {"sky": ["#12121f", "#0b0b14", "#07070f", "#030308"], "glow": "rgba(110,100,200,.12)", "deep": "rgba(15,15,35,.55)", "env": "void"}}, "Steel": {"pill": ["#e2e2f0", "#b7b7ce", "#8f8fae", "#666680"], "mote": ["m-star", "#e8ecf4"], "aurora": ["200,210,235", "160,180,220"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8ecf4", "aura": "232,236,244"}, "world": {"sky": ["#1c242e", "#141a22", "#0d1118", "#05070b"], "glow": "rgba(190,210,235,.14)", "deep": "rgba(35,45,60,.5)", "env": "void"}}, "Fairy": {"pill": ["#ffc2dd", "#d685ad", "#b35685", "#853d63"], "mote": ["m-orb", "#ffb3e2"], "aurora": ["255,150,210", "190,140,255"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffb3e2", "aura": "255,179,226"}, "world": {"sky": ["#3a1c40", "#2b1530", "#1c0c22", "#0e0512"], "glow": "rgba(255,170,220,.17)", "deep": "rgba(80,30,90,.5)", "env": "void"}}};
+const $ = s => document.querySelector(s);
+const DUR = C.duration;
+
+/* ---------- world ---------- */
+const prim = TYPES[C.world[0]], sec = TYPES[C.world[1]] || prim;
+const sky = prim.world.sky;
+$('#sky').style.background = `linear-gradient(180deg, ${sky[0]} 0%, ${sky[1]} 42%, ${sky[2]} 74%, ${sky[3]} 100%)`;
+$('#glowC').style.background = `radial-gradient(ellipse, ${prim.world.glow} 0%, transparent 65%)`;
+$('#deep').style.background = `radial-gradient(ellipse 120% 55% at 50% 108%, ${prim.world.deep} 0%, transparent 70%)`;
+const env = $('#envLayer');
+[0,1,2].forEach(i => {
+  const a = document.createElement('div'); a.className = 'aurora';
+  const col = i === 1 ? sec.aurora : prim.aurora;
+  a.style.top = (6 + i * 17) + '%';
+  a.style.background = `linear-gradient(90deg, transparent, rgba(${col},.34), rgba(${col},.12), transparent)`;
+  env.appendChild(a);
+});
+if (prim.world.env === 'storm' || sec.world.env === 'storm') {
+  for (let i = 0; i < 6; i++) {
+    const c = document.createElement('div'); c.className = 'cloud';
+    c.style.width = (380 + (i * 173) % 420) + 'px'; c.style.height = (110 + (i * 89) % 90) + 'px';
+    c.style.left = ((i * 331) % 1700) + 'px'; c.style.top = (18 + (i * 67) % 190) + 'px';
+    env.appendChild(c);
+  }
+}
+/* motes: seeded */
+let seed = 1234567;
+const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+function motes(layer, count, typeObj, front) {
+  const host = $(layer);
+  for (let i = 0; i < count; i++) {
+    const m = document.createElement('div');
+    const [cls, color] = typeObj.mote;
+    m.className = 'mote ' + cls;
+    const s = 6 + rnd() * 13;
+    m.style.width = s + 'px'; m.style.height = s + 'px';
+    if (cls === 'm-ring') { m.style.borderColor = color; } else { m.style.background = color; }
+    m.style.left = (rnd() * 1880) + 'px'; m.style.top = (rnd() * 1040) + 'px';
+    m.style.opacity = .25 + rnd() * .5;
+    m.dataset.drift = 30 + rnd() * 70; m.dataset.dur = 7 + rnd() * 9;
+    host.appendChild(m);
+  }
+}
+motes('#motesBack', 15, prim, false);
+motes('#motesFront', 9, sec, true);
+
+/* ---------- heroes ---------- */
+const stage = $('#stageLayer');
+(C.heroes || []).forEach((h, i) => {
+  const glow = document.createElement('div'); glow.className = 'heroGlow';
+  const gw = h.size * 1.15;
+  glow.style.cssText = `left:${h.x + h.size/2 - gw/2}px; top:${h.y + h.size/2 - gw/2}px; width:${gw}px; height:${gw}px; background:radial-gradient(circle, ${(TYPES[h.glowType || C.world[0]]).mote[1]}55 0%, transparent 65%); opacity:0;`;
+  glow.id = 'glow' + i; stage.appendChild(glow);
+  const pool = document.createElement('div'); pool.className = 'pool';
+  pool.style.cssText = `left:${h.x + h.size*0.14}px; top:${h.y + h.size*0.86}px; width:${h.size*0.72}px; height:${h.size*0.13}px; background:radial-gradient(ellipse, rgba(0,0,0,.5), transparent 70%); opacity:0;`;
+  pool.id = 'pool' + i; stage.appendChild(pool);
+  const plate = document.createElement('div'); plate.className = 'heroPlate'; plate.id = 'hero' + i;
+  plate.style.cssText = `left:${h.x}px; top:${h.y}px; width:${h.size}px; height:${h.size}px; opacity:0;`;
+  plate.innerHTML = `<img class="artImg" src="assets/${h.art}"/><img class="silImg" src="assets/${h.sil}" style="opacity:${h.silUntil ? 1 : 0}"/>`;
+  stage.appendChild(plate);
+});
+
+/* ---------- clips ---------- */
+const clipLayer = $('#clipLayer');
+(C.clips || []).forEach((cl, i) => {
+  const host = document.createElement('div');
+  if (cl.mode === 'framed') {
+    host.className = 'clipFramed';
+    host.style.cssText = `left:${cl.x}px; top:${cl.y}px; width:${cl.w}px; height:${cl.h}px;`;
+  } else { host.className = 'clipFull'; }
+  host.id = 'clip' + i;
+  let html = '';
+  for (let f = 1; f <= cl.frames; f++) html += `<img src="assets/${cl.dir}/f${String(f).padStart(3,'0')}.jpg"/>`;
+  host.innerHTML = html;
+  clipLayer.appendChild(host);
+  if (cl.label) {
+    const tag = document.createElement('div'); tag.className = 'clipTag'; tag.id = 'clipTag' + i;
+    tag.textContent = cl.label;
+    tag.style.cssText = cl.mode === 'framed' ? `left:${cl.x + 18}px; top:${cl.y + 16}px;` : 'left:56px; bottom:150px;';
+    clipLayer.appendChild(tag);
+  }
+});
+
+/* ---------- ranking ---------- */
+if (C.ranking) {
+  C.ranking.slots.forEach((s, i) => {
+    const slot = document.createElement('div'); slot.className = 'rankSlot'; slot.id = 'rank' + i;
+    slot.style.cssText = `left:${s.x}px; top:${s.y}px; width:${s.w}px; height:${s.w}px; opacity:0;`;
+    slot.innerHTML = `<img src="assets/${s.art}"/>`;
+    stage.appendChild(slot);
+    const num = document.createElement('div'); num.className = 'rankNum'; num.id = 'rankNum' + i;
+    num.textContent = '#' + s.num;
+    num.style.cssText = `left:${s.x + s.w/2 - 90}px; top:${s.y - 118}px; width:180px; text-align:center;`;
+    stage.appendChild(num);
+    const nm = document.createElement('div'); nm.className = 'rankName'; nm.id = 'rankName' + i;
+    nm.textContent = s.name;
+    nm.style.cssText = `left:${s.x}px; top:${s.y + s.w + 16}px; width:${s.w}px;`;
+    stage.appendChild(nm);
+  });
+}
+
+/* ---------- text blocks ---------- */
+if (C.formLabel) { $('#formChip').innerHTML = C.formLabel; }
+if (C.nameBlock) {
+  $('#pokeName').textContent = C.nameBlock.name;
+  $('#pokeSub').textContent = C.nameBlock.sub || '';
+  (C.nameBlock.pills || []).forEach(tn => {
+    const t = TYPES[tn]; const p = document.createElement('div'); p.className = 'pill';
+    p.textContent = tn.toUpperCase();
+    p.style.background = `linear-gradient(180deg, ${t.pill[0]}, ${t.pill[1]} 55%, ${t.pill[2]})`;
+    $('#pillRow').appendChild(p);
+  });
+}
+(C.headlines || []).forEach((h, i) => {
+  const d = document.createElement('div'); d.className = 'headline' + (h.silver ? ' silver' : '');
+  d.id = 'hl' + i; d.innerHTML = h.html;
+  d.style.cssText = `left:${h.x}px; top:${h.y}px; font-size:${h.size || 84}px;`;
+  $('#fxLayer').appendChild(d);
+});
+(C.chips || []).forEach((ch, i) => {
+  const d = document.createElement('div'); d.className = 'chip'; d.id = 'chip' + i;
+  d.innerHTML = ch.html;
+  d.style.cssText = `left:${ch.x}px; top:${ch.y}px;`;
+  $('#fxLayer').appendChild(d);
+});
+if (C.quoteCard) {
+  $('#quoteText').textContent = C.quoteCard.text;
+  $('#quoteSrc').textContent = C.quoteCard.src || '';
+}
+if (C.titleCard) {
+  $('#titleBig').innerHTML = C.titleCard.big;
+  $('#titleSub').textContent = C.titleCard.sub || '';
+}
+/* captions */
+const capWrap = $('#capWrap');
+(C.captions || []).forEach((cap, ci) => {
+  const d = document.createElement('div'); d.className = 'cap'; d.id = 'cap' + ci;
+  const words = cap[1].split(' ');
+  const gold = cap[3] || [];
+  d.innerHTML = '<div class="capIn">' + words.map((w, wi) =>
+    `<span class="${gold.includes(wi) ? 'g' : ''}">${w}</span>`).join(' ') + '</div>';
+  capWrap.appendChild(d);
+});
+
+/* ---------- timeline ---------- */
+const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+window.__timelines = { main: tl };
+document.querySelectorAll('.aurora').forEach((a, i) => {
+  tl.to(a, { x: i % 2 ? -70 : 70, opacity: .34, duration: 9 + i * 2.5, yoyo: true, repeat: Math.ceil(DUR / (9 + i * 2.5)) - 1, ease: 'sine.inOut' }, 0);
+});
+document.querySelectorAll('.mote').forEach(m => {
+  const d = parseFloat(m.dataset.drift), du = parseFloat(m.dataset.dur);
+  tl.to(m, { y: -d, x: d * .3, duration: du, yoyo: true, repeat: Math.ceil(DUR / du) - 1, ease: 'sine.inOut' }, 0);
+});
+if (C.formLabel) tl.to('#formChip', { opacity: 1, duration: .5 }, 0.15);
+tl.to('#brandChip', { opacity: 1, duration: .5 }, 0.3);
+
+(C.heroes || []).forEach((h, i) => {
+  const plate = '#hero' + i;
+  tl.fromTo(plate, { opacity: 0, scale: .92, y: 26 }, { opacity: 1, scale: 1, y: 0, duration: .55, ease: 'back.out(1.6)' }, h.in);
+  tl.to('#glow' + i, { opacity: .85, duration: .6 }, h.in + .1);
+  tl.to('#pool' + i, { opacity: 1, duration: .6 }, h.in + .1);
+  if (h.silUntil) tl.to(plate + ' .silImg', { opacity: 0, duration: .35 }, h.silUntil);
+  if (h.idle) {
+    const reps = Math.max(1, Math.floor((Math.min(h.out || DUR, DUR) - h.idle[0]) / 2.6));
+    tl.to(plate, { y: -13, duration: 1.3, yoyo: true, repeat: reps * 2 - 1, ease: 'sine.inOut' }, h.idle[0]);
+  }
+  if (h.punch) tl.to(plate, { scale: 1.045, duration: .3, yoyo: true, repeat: 1, ease: 'power2.inOut' }, h.punch);
+  if (h.out) tl.to(plate, { opacity: 0, scale: .95, duration: .4 }, h.out);
+  if (h.out) tl.to('#glow' + i, { opacity: 0, duration: .4 }, h.out);
+});
+if (C.nameBlock) {
+  tl.fromTo('#nameBlock', { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: .5 }, C.nameBlock.at);
+  if (C.nameBlock.out) tl.to('#nameBlock', { opacity: 0, duration: .4 }, C.nameBlock.out);
+}
+(C.headlines || []).forEach((h, i) => {
+  tl.fromTo('#hl' + i, { opacity: 0, scale: .8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: .38, ease: 'back.out(2.2)' }, h.at);
+  if (h.out) tl.to('#hl' + i, { opacity: 0, duration: .35 }, h.out);
+});
+(C.chips || []).forEach((ch, i) => {
+  tl.fromTo('#chip' + i, { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: .3, ease: 'back.out(2.6)' }, ch.at);
+  if (ch.out) tl.to('#chip' + i, { opacity: 0, duration: .3 }, ch.out);
+});
+if (C.quoteCard) {
+  tl.fromTo('#quoteCard', { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .45, ease: 'back.out(1.5)' }, C.quoteCard.at);
+  tl.to('#quoteCard', { opacity: 0, duration: .4 }, C.quoteCard.out);
+}
+if (C.titleCard) {
+  tl.fromTo('#titleCard', { opacity: 0, scale: .94 }, { opacity: 1, scale: 1, duration: .5, ease: 'back.out(1.4)' }, C.titleCard.at);
+  if (C.titleCard.out) tl.to('#titleCard', { opacity: 0, duration: .4 }, C.titleCard.out);
+}
+if (C.statAnim) {
+  const o = { v: C.statAnim.from };
+  const el = document.createElement('div'); el.className = 'chip'; el.id = 'statChip';
+  el.style.cssText = `left:${C.statAnim.x}px; top:${C.statAnim.y}px; font-size:40px;`;
+  el.innerHTML = `${C.statAnim.label} <span class="gold">${C.statAnim.from}</span>`;
+  $('#fxLayer').appendChild(el);
+  tl.fromTo('#statChip', { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: .35, ease: 'back.out(2.4)' }, C.statAnim.at);
+  tl.to(o, { v: C.statAnim.to, duration: 1.1, ease: 'power2.inOut', onUpdate: () => {
+    el.innerHTML = `${C.statAnim.label} <span class="gold">${Math.round(o.v)}</span>`; } }, C.statAnim.at + .2);
+  if (C.statAnim.out) tl.to('#statChip', { opacity: 0, duration: .35 }, C.statAnim.out);
+}
+(C.clips || []).forEach((cl, i) => {
+  const frames = document.querySelectorAll('#clip' + i + ' img');
+  const st = { f: 0 };
+  tl.to('#clip' + i, { opacity: 1, duration: .3 }, cl.at);
+  if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 1, duration: .3 }, cl.at);
+  if (cl.label) tl.to('#clipTag' + i, { opacity: 1, duration: .3 }, cl.at + .15);
+  tl.to(st, { f: cl.frames - 1, duration: cl.dur, ease: 'none', onUpdate: () => {
+    const idx = Math.round(st.f);
+    frames.forEach((im, fi) => im.style.opacity = fi === idx ? 1 : 0);
+  } }, cl.at);
+  tl.to('#clip' + i, { opacity: 0, duration: .35 }, cl.at + cl.dur);
+  if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 0, duration: .35 }, cl.at + cl.dur);
+  if (cl.label) tl.to('#clipTag' + i, { opacity: 0, duration: .3 }, cl.at + cl.dur - .1);
+});
+if (C.ranking) {
+  C.ranking.slots.forEach((s, i) => {
+    tl.fromTo('#rank' + i, { opacity: 0, y: 30 }, { opacity: .38, y: 0, duration: .45 }, s.in);
+  });
+  (C.ranking.hits || []).forEach(hit => {
+    const i = hit.idx;
+    tl.to('#rank' + i, { opacity: 1, scale: 1.1, duration: .32, ease: 'back.out(2)' }, hit.t);
+    tl.fromTo('#rankNum' + i, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .32, ease: 'back.out(2.4)' }, hit.t);
+    tl.to('#rankName' + i, { opacity: 1, duration: .3 }, hit.t + .05);
+    C.ranking.slots.forEach((s2, j) => { if (j !== i) tl.to('#rank' + j, { scale: 1, duration: .3 }, hit.t); });
+  });
+}
+/* captions */
+(C.captions || []).forEach((cap, ci) => {
+  const t = cap[0], spans = document.querySelectorAll('#cap' + ci + ' span');
+  const onsets = cap[2];
+  tl.set('#cap' + ci, { opacity: 1 }, t);
+  spans.forEach((sp, wi) => {
+    tl.to(sp, { opacity: 1, duration: .12 }, onsets && onsets[wi] !== undefined ? onsets[wi] : t + wi * .16);
+  });
+  const next = (C.captions[ci + 1] || [DUR])[0];
+  tl.to('#cap' + ci, { opacity: 0, duration: .18 }, Math.min(next - .18, t + 4.4));
+});
+tl.to({}, { duration: 0.01 }, DUR - 0.01);
+</script>
+</body>
+</html>

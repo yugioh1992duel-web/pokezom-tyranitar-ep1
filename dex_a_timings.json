@@ -1,0 +1,80 @@
+{
+ "text": "If it rampages, it knocks down mountains and buries rivers. Maps must be redrawn afterward.",
+ "words": [
+  {
+   "w": "If",
+   "s": 0.0,
+   "e": 0.5
+  },
+  {
+   "w": "it",
+   "s": 0.5,
+   "e": 0.84
+  },
+  {
+   "w": "rampages,",
+   "s": 0.84,
+   "e": 1.66
+  },
+  {
+   "w": "it",
+   "s": 2.52,
+   "e": 2.66
+  },
+  {
+   "w": "knocks",
+   "s": 2.66,
+   "e": 2.9
+  },
+  {
+   "w": "down",
+   "s": 2.9,
+   "e": 3.38
+  },
+  {
+   "w": "mountains",
+   "s": 3.38,
+   "e": 4.02
+  },
+  {
+   "w": "and",
+   "s": 4.02,
+   "e": 4.82
+  },
+  {
+   "w": "buries",
+   "s": 4.82,
+   "e": 5.34
+  },
+  {
+   "w": "rivers.",
+   "s": 5.34,
+   "e": 5.82
+  },
+  {
+   "w": "Maps",
+   "s": 6.86,
+   "e": 7.18
+  },
+  {
+   "w": "must",
+   "s": 7.18,
+   "e": 7.74
+  },
+  {
+   "w": "be",
+   "s": 7.74,
+   "e": 8.02
+  },
+  {
+   "w": "redrawn",
+   "s": 8.02,
+   "e": 8.74
+  },
+  {
+   "w": "afterward.",
+   "s": 8.74,
+   "e": 9.5
+  }
+ ]
+}
