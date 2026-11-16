@@ -19,6 +19,22 @@
   .m-gem { border-radius:4px !important; transform:rotate(45deg); }
   .m-star { clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%); border-radius:0 !important; }
   .cloud { position:absolute; border-radius:50%; filter:blur(38px); background:rgba(16,20,38,.82); }
+  /* world FX (ported from the Shorts factory standard) */
+  .sandP { position:absolute; height:3px; border-radius:2px; background:linear-gradient(90deg, transparent, rgba(232,204,122,.85), transparent); pointer-events:none; }
+  .dustBand { position:absolute; left:-5%; width:110%; height:300px; bottom:-90px; border-radius:50%;
+    filter:blur(34px); background:radial-gradient(ellipse, rgba(214,178,110,.20), transparent 70%); }
+  .gridFloor { position:absolute; left:-10%; width:120%; height:430px; bottom:-140px;
+    background:repeating-linear-gradient(90deg, rgba(64,224,255,.16) 0 2px, transparent 2px 92px), repeating-linear-gradient(0deg, rgba(64,224,255,.13) 0 2px, transparent 2px 64px);
+    transform:perspective(420px) rotateX(58deg); transform-origin:bottom; }
+  .pillar { position:absolute; width:120px; border-radius:50%; filter:blur(26px);
+    background:linear-gradient(180deg, transparent, rgba(64,224,255,.20), transparent); }
+  #evoFlash { position:absolute; inset:0; background:#fff; opacity:0; z-index:26; pointer-events:none; }
+  .jetP { position:absolute; border-radius:50%; pointer-events:none; filter:blur(1px); }
+  /* B-roll still cards */
+  .stillCard { position:absolute; z-index:22; border-radius:22px; overflow:hidden; opacity:0;
+    border:2px solid rgba(255,255,255,.35); box-shadow:0 30px 80px rgba(0,0,0,.6); background:#0a0e1e; }
+  .stillCard img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .stillCard img.contain { object-fit:contain; }
   #vignette { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 44%, transparent 52%, rgba(0,0,0,.5) 100%); }
   /* header */
   #formChip { position:absolute; left:56px; top:44px; z-index:40; padding:12px 26px;
@@ -105,10 +121,10 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="47.3" data-width="1920" data-height="1080">
-  <div class="clip" data-start="0" data-duration="47.3" data-track-index="0" style="position:absolute;inset:0;">
+<div id="root" data-composition-id="main" data-start="0" data-duration="45.28" data-width="1920" data-height="1080">
+  <div class="clip" data-start="0" data-duration="45.28" data-track-index="0" style="position:absolute;inset:0;">
     <div id="sky"></div><div id="glowC"></div><div id="deep"></div>
-    <div id="envLayer"></div><div id="motesBack"></div>
+    <div id="envLayer"></div><div id="worldFx"></div><div id="motesBack"></div>
     <div id="stageLayer"></div>
     <div id="clipLayer"></div><div id="clipVeil"></div>
     <div id="motesFront"></div><div id="vignette"></div>
@@ -117,12 +133,13 @@
     <div id="fxLayer"></div>
     <div id="quoteCard"><div id="quoteHead">POKÉDEX ENTRY</div><div id="quoteText"></div><div id="quoteSrc"></div></div>
     <div id="titleCard"><div id="titleBig"></div><div id="titleSub"></div></div>
+    <div id="evoFlash"></div>
     <div id="capWrap"></div>
   </div>
 </div>
 <script src="assets/gsap.min.js"></script>
 <script>
-const C = {"id": "s6", "start": 294.68, "dur": 47.3, "types": ["Rock", "Electric"], "formLabel": "FORM 5 OF 6", "heroes": [{"art": "Iron_Thorns.png", "sil": "Iron_Thorns_sil.png", "x": 1080, "y": 185, "size": 800, "in": 0.3, "silUntil": 0, "idle": [1.5, 999]}], "nameBlock": {"name": "IRON THORNS", "sub": "PARADOX POK\u00c9MON \u00b7 #995", "pills": ["Rock", "Electric"], "at": 0.5}, "quoteCard": {"at": 15.9, "text": "A Tyranitar from one billion years into the future.", "src": "POK\u00c9DEX \u2014 POK\u00c9MON SCARLET", "out": 22.4}, "chips": [{"at": 22.9, "html": "SOURCE: A <span class='gold'>DUBIOUS</span> MAGAZINE", "out": 27.5, "x": 70, "y": 880}, {"at": 27.8, "html": "<span class='gold'>570</span> TOTAL STATS", "out": 31.0, "x": 70, "y": 880}, {"at": 31.3, "html": "ABILITY: <span class='gold'>QUARK DRIVE</span>", "out": 36.0, "x": 70, "y": 880}], "world": ["Rock", "Electric"], "duration": 47.3, "captions": [[0.0, "Now the robot. For real this time.", [0.0, 0.38, 0.7, 1.4, 1.46, 1.62, 1.78], [2]], [2.8, "Iron Thorns from Pok\u00e9mon Violet, a paradox Pok\u00e9mon that", [2.8, 2.8, 3.18, 3.56, 3.78, 4.72, 4.74, 5.06, 5.58], []], [5.9, "looks like somebody rebuilt Tyranitar out of steel and", [5.9, 6.08, 6.28, 6.6, 6.96, 7.7, 7.86, 7.96, 8.24], []], [8.54, "lightning, a billion years from now.", [8.54, 9.18, 9.3, 9.64, 10.0, 10.3], [2]], [10.92, "And I mean that literally, its own Pok\u00e9dex entry", [10.92, 11.02, 11.18, 11.3, 11.44, 12.02, 12.12, 12.28, 12.76], []], [13.02, "says it matches a Pok\u00e9mon described in a dubious", [13.02, 13.38, 13.58, 13.84, 14.04, 14.32, 14.84, 15.08, 15.16], [8]], [15.5, "magazine at a Tyranitar from one billion years into", [15.5, 16.0, 16.54, 17.24, 18.7, 19.0, 19.4, 20.0, 20.64], [6]], [21.22, "the future as it dubious magazine.", [21.22, 21.84, 22.28, 22.84, 23.34, 23.72], [4]], [24.84, "Even the Pok\u00e9dex is roasting it.", [24.84, 25.1, 25.18, 25.62, 25.76, 26.12], []], [26.68, "It's a rock and electric type with 570 total", [26.68, 26.8, 26.88, 27.08, 27.3, 27.56, 27.86, 28.06, 28.46], []], [29.18, "stats and an ability called Quark Drive that super", [29.18, 29.54, 30.08, 30.16, 30.44, 30.72, 31.16, 31.4, 31.68], []], [32.02, "charges it on electric terrain.", [32.02, 32.44, 32.68, 32.82, 33.04], []], [34.02, "In the games, you find it deep inside Area", [34.02, 34.08, 34.16, 34.5, 34.58, 34.76, 34.9, 35.18, 35.62], []], [35.82, "Zero, a giant crater hiding Pok\u00e9mon from the far", [35.82, 36.7, 36.84, 37.04, 37.28, 37.8, 38.0, 38.44, 38.56], []], [38.8, "future. The movie prop became canon.", [38.8, 39.74, 39.96, 40.14, 40.42, 40.8], []], [41.62, "The robot Tyranitar is real, it's here, and it", [41.62, 41.76, 41.98, 42.48, 42.74, 43.04, 43.74, 44.52, 44.7], [1]], [44.8, "is not the strongest one.", [44.8, 44.94, 45.24, 45.66, 46.02], []], [47.0, "Because", [47.0], []]]};
+const C = {"id": "s6", "start": 292.32, "dur": 45.28, "types": ["Rock", "Electric"], "formLabel": "FORM 5 OF 6", "envFX": [{"kind": "future", "at": 0.5, "out": 45.0}], "heroes": [{"art": "Iron_Thorns.png", "sil": "Iron_Thorns_sil.png", "x": 1080, "y": 185, "size": 800, "in": 0.3, "silUntil": 0, "idle": [1.5, 999]}], "nameBlock": {"name": "IRON THORNS", "sub": "PARADOX POK\u00c9MON \u00b7 #995", "pills": ["Rock", "Electric"], "at": 0.5}, "quoteCard": {"at": 15.9, "text": "A Tyranitar from one billion years into the future.", "src": "POK\u00c9DEX \u2014 POK\u00c9MON SCARLET", "out": 21.6}, "chips": [{"at": 21.3, "html": "SOURCE: A <span class='gold'>DUBIOUS</span> MAGAZINE", "out": 25.5, "x": 70, "y": 880}, {"at": 25.8, "html": "<span class='gold'>570</span> TOTAL STATS", "out": 29.0, "x": 70, "y": 880}, {"at": 28.4, "html": "ABILITY: <span class='gold'>QUARK DRIVE</span>", "out": 33.5, "x": 70, "y": 880}], "stills": [{"img": "still_areazero.jpg", "at": 33.2, "out": 40.5, "x": 70, "y": 545, "w": 700, "h": 330, "label": "AREA ZERO \u2014 POK\u00c9MON VIOLET"}], "world": ["Rock", "Electric"], "duration": 45.28, "captions": [[0.0, "Now the robot. For real this time.", [0.0, 0.38, 0.7, 1.38, 1.46, 1.62, 1.78], [2]], [2.8, "Iron Thorns from Pok\u00e9mon Violet, a paradox Pok\u00e9mon that", [2.8, 2.8, 3.18, 3.56, 3.8, 4.72, 4.74, 5.06, 5.58], []], [5.9, "looks like somebody rebuilt Tyranitar out of steel and", [5.9, 6.08, 6.28, 6.6, 6.96, 7.68, 7.88, 7.96, 8.26], []], [8.54, "lightning, a billion years from now.", [8.54, 9.2, 9.3, 9.64, 10.02, 10.3], [2]], [10.94, "And I mean that literally, its own Pok\u00e9dex entry", [10.94, 11.02, 11.18, 11.3, 11.44, 12.02, 12.12, 12.26, 12.76], []], [13.04, "says it matches a Pok\u00e9mon described in a dubious", [13.04, 13.38, 13.58, 13.84, 14.04, 14.3, 14.62, 15.06, 15.16], [8]], [15.5, "magazine as a Tyranitar from one billion years into", [15.5, 16.0, 16.54, 17.02, 17.74, 18.08, 18.4, 19.0, 19.54], [6]], [19.78, "the future, as it dubious magazine.", [19.78, 19.92, 20.7, 20.82, 21.32, 21.7], [4]], [22.8, "Even the Pok\u00e9dex is roasting it.", [22.8, 23.06, 23.16, 23.6, 23.74, 24.1], []], [24.62, "It's a rock and electric type with 570 total", [24.62, 24.78, 24.86, 25.08, 25.28, 25.5, 25.86, 26.04, 26.42], []], [27.16, "stats and an ability called Quark Drive that super", [27.16, 27.52, 28.06, 28.14, 28.42, 28.68, 29.14, 29.38, 29.66], []], [30.0, "charges it on electric terrain.", [30.0, 30.46, 30.66, 30.8, 31.04], []], [31.98, "In the games, you find it deep inside Area", [31.98, 32.06, 32.14, 32.44, 32.56, 32.74, 32.88, 33.16, 33.58], []], [33.78, "Zero, a giant crater hiding Pok\u00e9mon from the far", [33.78, 34.7, 34.82, 35.02, 35.26, 35.76, 35.98, 36.44, 36.54], []], [36.78, "future. The movie prop became canon.", [36.78, 37.82, 37.94, 38.1, 38.4, 38.78], []], [39.64, "The robot Tyranitar is real, it's here, and it", [39.64, 39.74, 39.96, 40.46, 40.72, 41.52, 41.7, 42.38, 42.66], [1]], [42.76, "is not the strongest one.", [42.76, 42.92, 43.22, 43.64, 43.98], []], [44.96, "Because", [44.96], []]]};
 const TYPES = {"Normal": {"pill": ["#d8d6b8", "#a8a77a", "#7d7c52", "#5c5b3a"], "mote": ["m-star", "#ffffff"], "aurora": ["255,240,200", "200,200,180"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffffff", "aura": "255,255,255"}, "world": {"sky": ["#292536", "#1d1a26", "#131020", "#08070f"], "glow": "rgba(200,190,255,.12)", "deep": "rgba(45,40,75,.5)", "env": "void"}}, "Fire": {"pill": ["#ffb066", "#ee8130", "#c85a10", "#96400a"], "mote": ["m-orb", "#ff9a3d"], "aurora": ["255,140,50", "255,80,40"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff9a3d", "aura": "255,154,61"}, "world": {"sky": ["#38150c", "#2b100a", "#1c0a06", "#0d0403"], "glow": "rgba(255,130,50,.16)", "deep": "rgba(80,20,5,.5)", "env": "ember"}}, "Water": {"pill": ["#a8c8ff", "#6390f0", "#3a68c8", "#2a4c96"], "mote": ["m-ring", "#a8dcff"], "aurora": ["90,160,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#a8dcff", "aura": "168,220,255"}, "world": {"sky": ["#0d4266", "#093049", "#051e33", "#020c18"], "glow": "rgba(90,200,255,.17)", "deep": "rgba(2,24,48,.55)", "env": "sea"}}, "Electric": {"pill": ["#ffe066", "#f7d02c", "#d9a400", "#a87e00"], "mote": ["m-spark", "#ffd94d"], "aurora": ["255,217,77", "255,170,0"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ffd94d", "aura": "255,217,77"}, "world": {"sky": ["#262262", "#1b1a52", "#121240", "#070722"], "glow": "rgba(140,130,255,.18)", "deep": "rgba(40,40,120,.5)", "env": "storm"}}, "Grass": {"pill": ["#b5e48c", "#7ac74c", "#57a02e", "#3f7a20"], "mote": ["m-leaf", "#7ee787"], "aurora": ["140,230,140", "90,200,160"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#7ee787", "aura": "126,231,135"}, "world": {"sky": ["#14351f", "#0f2a19", "#081c10", "#040f08"], "glow": "rgba(110,255,160,.13)", "deep": "rgba(10,50,25,.5)", "env": "void"}}, "Ice": {"pill": ["#d8f4f2", "#96d9d6", "#64b8b4", "#478a88"], "mote": ["m-gem", "#bfefff"], "aurora": ["170,240,255", "140,200,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#bfefff", "aura": "191,239,255"}, "world": {"sky": ["#123446", "#0e2a3a", "#081c29", "#040e16"], "glow": "rgba(170,230,255,.18)", "deep": "rgba(20,60,90,.5)", "env": "void"}}, "Fighting": {"pill": ["#f08078", "#c22e28", "#96201c", "#6e1613"], "mote": ["m-orb", "#ff6b4a"], "aurora": ["255,110,70", "220,60,50"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#ff6b4a", "aura": "255,107,74"}, "world": {"sky": ["#381c0d", "#2b1509", "#1c0d05", "#0e0603"], "glow": "rgba(255,150,80,.14)", "deep": "rgba(70,35,10,.5)", "env": "void"}}, "Poison": {"pill": ["#d88fd8", "#a33ea1", "#7c2a7c", "#5a1d5a"], "mote": ["m-ring", "#c77dff"], "aurora": ["199,125,255", "140,80,220"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#c77dff", "aura": "199,125,255"}, "world": {"sky": ["#2a1242", "#1e0f2e", "#130826", "#08040f"], "glow": "rgba(190,110,255,.15)", "deep": "rgba(50,15,90,.5)", "env": "void"}}, "Ground": {"pill": ["#f2dd9a", "#e2bf65", "#c09e42", "#8f742e"], "mote": ["m-orb", "#e8cc7a"], "aurora": ["240,210,130", "210,170,90"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8cc7a", "aura": "232,204,122"}, "world": {"sky": ["#33200f", "#241708", "#170d05", "#0b0603"], "glow": "rgba(255,200,110,.13)", "deep": "rgba(70,45,15,.5)", "env": "void"}}, "Flying": {"pill": ["#d3c6ff", "#a98ff3", "#8266d8", "#5f45ab"], "mote": ["m-leaf", "#e8f4ff"], "aurora": ["190,200,255", "150,220,255"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#e8f4ff", "aura": "232,244,255"}, "world": {"sky": ["#16304f", "#10233d", "#0a1729", "#050b14"], "glow": "rgba(150,200,255,.16)", "deep": "rgba(25,55,100,.5)", "env": "void"}}, "Psychic": {"pill": ["#ff9ebb", "#f95587", "#d12c64", "#9c1f49"], "mote": ["m-orb", "#ff8fb8"], "aurora": ["255,120,180", "190,90,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff8fb8", "aura": "255,143,184"}, "world": {"sky": ["#33163f", "#260f33", "#180a24", "#0b0512"], "glow": "rgba(255,140,220,.15)", "deep": "rgba(70,20,100,.5)", "env": "void"}}, "Bug": {"pill": ["#d4e86a", "#a6b91a", "#7f9112", "#5c6a0c"], "mote": ["m-orb", "#d8f76a"], "aurora": ["200,240,110", "140,220,120"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#d8f76a", "aura": "216,247,106"}, "world": {"sky": ["#1a3312", "#12260e", "#0a1a07", "#050d04"], "glow": "rgba(170,255,120,.13)", "deep": "rgba(20,55,15,.5)", "env": "canopy"}}, "Rock": {"pill": ["#ddd29a", "#b6a136", "#8f7d24", "#665a1a"], "mote": ["m-gem", "#cfc48a"], "aurora": ["210,195,140", "170,155,100"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#cfc48a", "aura": "207,196,138"}, "world": {"sky": ["#2c2417", "#201a12", "#140f09", "#0a0705"], "glow": "rgba(220,190,130,.12)", "deep": "rgba(60,48,28,.5)", "env": "void"}}, "Ghost": {"pill": ["#b3a1d6", "#735797", "#553f73", "#3d2c54"], "mote": ["m-orb", "#b18cff"], "aurora": ["150,110,230", "110,80,200"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#b18cff", "aura": "177,140,255"}, "world": {"sky": ["#20133c", "#160f2b", "#0e0820", "#06040f"], "glow": "rgba(150,120,255,.16)", "deep": "rgba(35,20,80,.5)", "env": "void"}}, "Dragon": {"pill": ["#b394ff", "#7d55e0", "#5530b8", "#3f2094"], "mote": ["m-orb", "#57f7d6"], "aurora": ["96,80,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#57f7d6", "aura": "87,247,214"}, "world": {"sky": ["#232c58", "#1a2350", "#121a40", "#070b1e"], "glow": "rgba(120,130,255,.20)", "deep": "rgba(50,60,140,.5)", "env": "void"}}, "Dark": {"pill": ["#a08b78", "#705746", "#544134", "#3a2d24"], "mote": ["m-orb", "#8a7fd6"], "aurora": ["110,95,180", "70,60,130"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#8a7fd6", "aura": "138,127,214"}, "world": {"sky": ["#12121f", "#0b0b14", "#07070f", "#030308"], "glow": "rgba(110,100,200,.12)", "deep": "rgba(15,15,35,.55)", "env": "void"}}, "Steel": {"pill": ["#e2e2f0", "#b7b7ce", "#8f8fae", "#666680"], "mote": ["m-star", "#e8ecf4"], "aurora": ["200,210,235", "160,180,220"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8ecf4", "aura": "232,236,244"}, "world": {"sky": ["#1c242e", "#141a22", "#0d1118", "#05070b"], "glow": "rgba(190,210,235,.14)", "deep": "rgba(35,45,60,.5)", "env": "void"}}, "Fairy": {"pill": ["#ffc2dd", "#d685ad", "#b35685", "#853d63"], "mote": ["m-orb", "#ffb3e2"], "aurora": ["255,150,210", "190,140,255"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffb3e2", "aura": "255,179,226"}, "world": {"sky": ["#3a1c40", "#2b1530", "#1c0c22", "#0e0512"], "glow": "rgba(255,170,220,.17)", "deep": "rgba(80,30,90,.5)", "env": "void"}}};
 const $ = s => document.querySelector(s);
 const DUR = C.duration;
@@ -149,6 +166,35 @@ if (prim.world.env === 'storm' || sec.world.env === 'storm') {
     env.appendChild(c);
   }
 }
+/* world FX layers: sandstorm / future grid / dust band, gated by config windows */
+const worldFx = $('#worldFx');
+(C.envFX || []).forEach((fx, fi) => {
+  const host = document.createElement('div');
+  host.id = 'envfx' + fi;
+  host.style.cssText = 'position:absolute; inset:0; opacity:0;';
+  if (fx.kind === 'sand') {
+    for (let i = 0; i < 42; i++) {
+      const p = document.createElement('div'); p.className = 'sandP';
+      const w = 120 + (i * 67) % 260;
+      p.style.width = w + 'px';
+      p.style.left = ((i * 431) % 2100 - 200) + 'px';
+      p.style.top = ((i * 197) % 1080) + 'px';
+      p.dataset.speed = 1400 + (i * 211) % 1200;
+      host.appendChild(p);
+    }
+  } else if (fx.kind === 'future') {
+    const g = document.createElement('div'); g.className = 'gridFloor'; host.appendChild(g);
+    for (let i = 0; i < 4; i++) {
+      const pl = document.createElement('div'); pl.className = 'pillar';
+      pl.style.left = (180 + i * 470) + 'px'; pl.style.top = '120px'; pl.style.height = '560px';
+      host.appendChild(pl);
+    }
+  } else if (fx.kind === 'dust') {
+    const d = document.createElement('div'); d.className = 'dustBand'; host.appendChild(d);
+  }
+  worldFx.appendChild(host);
+});
+
 /* motes: seeded */
 let seed = 1234567;
 const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
@@ -182,8 +228,17 @@ const stage = $('#stageLayer');
   pool.id = 'pool' + i; stage.appendChild(pool);
   const plate = document.createElement('div'); plate.className = 'heroPlate'; plate.id = 'hero' + i;
   plate.style.cssText = `left:${h.x}px; top:${h.y}px; width:${h.size}px; height:${h.size}px; opacity:0;`;
-  plate.innerHTML = `<img class="artImg" src="assets/${h.art}"/><img class="silImg" src="assets/${h.sil}" style="opacity:${h.silUntil ? 1 : 0}"/>`;
+  plate.innerHTML = `<img class="artImg" src="assets/${h.art}"/><img class="silImg" src="assets/${h.sil}" style="opacity:${h.silUntil ? 1 : 0}"/>` +
+    (h.white ? `<img class="whiteImg" src="assets/${h.white}" style="opacity:0"/>` : '');
   stage.appendChild(plate);
+  if (h.jet) {
+    for (let j = 0; j < 14; j++) {
+      const p = document.createElement('div'); p.className = 'jetP'; p.id = 'jet' + i + '_' + j;
+      const s = 16 + (j * 37) % 30;
+      p.style.cssText = `width:${s}px; height:${s}px; left:${h.x + h.size/2 - s/2}px; top:${h.y + h.size*0.88}px; background:${j % 3 ? 'rgba(255,170,60,.85)' : 'rgba(255,240,210,.9)'}; opacity:0; z-index:13;`;
+      stage.appendChild(p);
+    }
+  }
 });
 
 /* ---------- clips ---------- */
@@ -203,6 +258,20 @@ const clipLayer = $('#clipLayer');
     const tag = document.createElement('div'); tag.className = 'clipTag'; tag.id = 'clipTag' + i;
     tag.textContent = cl.label;
     tag.style.cssText = cl.mode === 'framed' ? `left:${cl.x + 18}px; top:${cl.y + 16}px;` : 'left:56px; bottom:150px;';
+    clipLayer.appendChild(tag);
+  }
+});
+
+/* ---------- B-roll still cards ---------- */
+(C.stills || []).forEach((st, i) => {
+  const host = document.createElement('div'); host.className = 'stillCard'; host.id = 'still' + i;
+  host.style.cssText = `left:${st.x}px; top:${st.y}px; width:${st.w}px; height:${st.h}px;`;
+  host.innerHTML = `<img class="${st.fit === 'contain' ? 'contain' : ''}" src="assets/${st.img}"/>`;
+  clipLayer.appendChild(host);
+  if (st.label) {
+    const tag = document.createElement('div'); tag.className = 'clipTag'; tag.id = 'stillTag' + i;
+    tag.textContent = st.label;
+    tag.style.cssText = `left:${st.x + 18}px; top:${st.y + 16}px;`;
     clipLayer.appendChild(tag);
   }
 });
@@ -230,12 +299,21 @@ if (C.formLabel) { $('#formChip').innerHTML = C.formLabel; }
 if (C.nameBlock) {
   $('#pokeName').textContent = C.nameBlock.name;
   $('#pokeSub').textContent = C.nameBlock.sub || '';
-  (C.nameBlock.pills || []).forEach(tn => {
-    const t = TYPES[tn]; const p = document.createElement('div'); p.className = 'pill';
+  const buildPills = (row, list, cls) => (list || []).forEach(tn => {
+    const t = TYPES[tn]; const p = document.createElement('div'); p.className = 'pill ' + (cls || '');
     p.textContent = tn.toUpperCase();
     p.style.background = `linear-gradient(180deg, ${t.pill[0]}, ${t.pill[1]} 55%, ${t.pill[2]})`;
-    $('#pillRow').appendChild(p);
+    row.appendChild(p);
   });
+  buildPills($('#pillRow'), C.nameBlock.pills, 'pillA');
+  if (C.pillSwap) {
+    /* second pill row overlays the first inside #pillRow; crossfaded at pillSwap.at */
+    $('#pillRow').style.position = 'relative';
+    const rowB = document.createElement('div'); rowB.id = 'pillRowB';
+    rowB.style.cssText = 'display:flex; gap:14px; opacity:0; position:absolute; left:0; top:0;';
+    buildPills(rowB, C.pillSwap.pills, 'pillB');
+    $('#pillRow').appendChild(rowB);
+  }
 }
 (C.headlines || []).forEach((h, i) => {
   const d = document.createElement('div'); d.className = 'headline' + (h.silver ? ' silver' : '');
@@ -292,13 +370,57 @@ tl.to('#brandChip', { opacity: 1, duration: .5 }, 0.3);
     tl.to(plate, { y: -13, duration: 1.3, yoyo: true, repeat: reps * 2 - 1, ease: 'sine.inOut' }, h.idle[0]);
   }
   if (h.punch) tl.to(plate, { scale: 1.045, duration: .3, yoyo: true, repeat: 1, ease: 'power2.inOut' }, h.punch);
+  if (h.evoIn) {
+    /* evolution arrival: white silhouette + flash, resolving into color */
+    tl.set(plate + ' .whiteImg', { opacity: 1 }, h.in);
+    tl.to('#evoFlash', { opacity: .85, duration: .1 }, h.in + .3);
+    tl.to('#evoFlash', { opacity: 0, duration: .5 }, h.in + .42);
+    tl.to(plate + ' .whiteImg', { opacity: 0, duration: .4 }, h.in + .45);
+  }
+  if (h.evoOutAt) {
+    /* evolution departure: hero whites out into the flash that ends the section */
+    tl.to(plate + ' .whiteImg', { opacity: 1, duration: .45, ease: 'power1.in' }, h.evoOutAt);
+    tl.to('#evoFlash', { opacity: .9, duration: .18 }, h.evoOutAt + .5);
+    tl.to('#evoFlash', { opacity: 0, duration: .01 }, h.evoOutAt + .7);
+  }
+  if (h.jet) {
+    for (let j = 0; j < 14; j++) {
+      const p = '#jet' + i + '_' + j;
+      const ang = (j / 13 - .5) * 1.5;
+      tl.fromTo(p, { opacity: .95, x: 0, y: 0, scale: 1 },
+        { opacity: 0, x: Math.sin(ang) * 190, y: 300 + (j % 4) * 46, scale: .3, duration: .62, ease: 'power2.out' }, h.jet.at + j * .012);
+    }
+    tl.to(plate, { y: -34, duration: .22, yoyo: true, repeat: 1, ease: 'power2.out' }, h.jet.at);
+  }
   if (h.out) tl.to(plate, { opacity: 0, scale: .95, duration: .4 }, h.out);
   if (h.out) tl.to('#glow' + i, { opacity: 0, duration: .4 }, h.out);
 });
 if (C.nameBlock) {
   tl.fromTo('#nameBlock', { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: .5 }, C.nameBlock.at);
   if (C.nameBlock.out) tl.to('#nameBlock', { opacity: 0, duration: .4 }, C.nameBlock.out);
+  if (C.pillSwap) {
+    tl.to('#pillRow .pillA', { opacity: 0, duration: .25 }, C.pillSwap.at);
+    tl.fromTo('#pillRowB', { opacity: 0, scale: .85 }, { opacity: 1, scale: 1, duration: .32, ease: 'back.out(2.2)' }, C.pillSwap.at + .1);
+  }
 }
+/* world FX windows */
+(C.envFX || []).forEach((fx, fi) => {
+  const host = '#envfx' + fi;
+  tl.to(host, { opacity: 1, duration: .8 }, fx.at);
+  if (fx.out) tl.to(host, { opacity: 0, duration: .9 }, fx.out);
+  if (fx.kind === 'sand') {
+    document.querySelectorAll(host + ' .sandP').forEach(p => {
+      const sp = parseFloat(p.dataset.speed);
+      const reps = Math.ceil(((fx.out || DUR) - fx.at) / (2600 / sp));
+      tl.fromTo(p, { x: 0 }, { x: -sp * .55, duration: 2600 / sp, repeat: Math.max(0, reps - 1), ease: 'none' }, fx.at);
+    });
+  }
+  if (fx.kind === 'future') {
+    document.querySelectorAll(host + ' .pillar').forEach((pl, pi) => {
+      tl.to(pl, { opacity: .55, duration: 1.6 + pi * .3, yoyo: true, repeat: Math.ceil(DUR / 3.2), ease: 'sine.inOut' }, fx.at);
+    });
+  }
+});
 (C.headlines || []).forEach((h, i) => {
   tl.fromTo('#hl' + i, { opacity: 0, scale: .8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: .38, ease: 'back.out(2.2)' }, h.at);
   if (h.out) tl.to('#hl' + i, { opacity: 0, duration: .35 }, h.out);
@@ -331,6 +453,15 @@ if (C.statAnim) {
   const st = { f: 0 };
   tl.to('#clip' + i, { opacity: 1, duration: .3 }, cl.at);
   if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 1, duration: .3 }, cl.at);
+  if (cl.mode === 'full' || cl.hideHud) {
+    /* keep footage clean: series HUD (name block, heroes) steps aside */
+    tl.to('#nameBlock', { opacity: 0, duration: .3 }, cl.at);
+    document.querySelectorAll('.heroPlate, .heroGlow, .pool').forEach(el => tl.to(el, { opacity: 0, duration: .3 }, cl.at));
+    tl.to('#nameBlock', { opacity: 1, duration: .35 }, cl.at + cl.dur + .05);
+    document.querySelectorAll('.heroPlate').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
+    document.querySelectorAll('.heroGlow').forEach(el => tl.to(el, { opacity: .85, duration: .35 }, cl.at + cl.dur + .05));
+    document.querySelectorAll('.pool').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
+  }
   if (cl.label) tl.to('#clipTag' + i, { opacity: 1, duration: .3 }, cl.at + .15);
   tl.to(st, { f: cl.frames - 1, duration: cl.dur, ease: 'none', onUpdate: () => {
     const idx = Math.round(st.f);
@@ -339,6 +470,12 @@ if (C.statAnim) {
   tl.to('#clip' + i, { opacity: 0, duration: .35 }, cl.at + cl.dur);
   if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 0, duration: .35 }, cl.at + cl.dur);
   if (cl.label) tl.to('#clipTag' + i, { opacity: 0, duration: .3 }, cl.at + cl.dur - .1);
+});
+(C.stills || []).forEach((st, i) => {
+  tl.fromTo('#still' + i, { opacity: 0, scale: .94, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: .4, ease: 'back.out(1.5)' }, st.at);
+  if (st.label) tl.to('#stillTag' + i, { opacity: 1, duration: .3 }, st.at + .15);
+  tl.to('#still' + i, { opacity: 0, duration: .35 }, st.out);
+  if (st.label) tl.to('#stillTag' + i, { opacity: 0, duration: .25 }, st.out - .05);
 });
 if (C.ranking) {
   C.ranking.slots.forEach((s, i) => {

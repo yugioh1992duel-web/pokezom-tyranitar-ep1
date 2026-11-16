@@ -19,6 +19,22 @@
   .m-gem { border-radius:4px !important; transform:rotate(45deg); }
   .m-star { clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%); border-radius:0 !important; }
   .cloud { position:absolute; border-radius:50%; filter:blur(38px); background:rgba(16,20,38,.82); }
+  /* world FX (ported from the Shorts factory standard) */
+  .sandP { position:absolute; height:3px; border-radius:2px; background:linear-gradient(90deg, transparent, rgba(232,204,122,.85), transparent); pointer-events:none; }
+  .dustBand { position:absolute; left:-5%; width:110%; height:300px; bottom:-90px; border-radius:50%;
+    filter:blur(34px); background:radial-gradient(ellipse, rgba(214,178,110,.20), transparent 70%); }
+  .gridFloor { position:absolute; left:-10%; width:120%; height:430px; bottom:-140px;
+    background:repeating-linear-gradient(90deg, rgba(64,224,255,.16) 0 2px, transparent 2px 92px), repeating-linear-gradient(0deg, rgba(64,224,255,.13) 0 2px, transparent 2px 64px);
+    transform:perspective(420px) rotateX(58deg); transform-origin:bottom; }
+  .pillar { position:absolute; width:120px; border-radius:50%; filter:blur(26px);
+    background:linear-gradient(180deg, transparent, rgba(64,224,255,.20), transparent); }
+  #evoFlash { position:absolute; inset:0; background:#fff; opacity:0; z-index:26; pointer-events:none; }
+  .jetP { position:absolute; border-radius:50%; pointer-events:none; filter:blur(1px); }
+  /* B-roll still cards */
+  .stillCard { position:absolute; z-index:22; border-radius:22px; overflow:hidden; opacity:0;
+    border:2px solid rgba(255,255,255,.35); box-shadow:0 30px 80px rgba(0,0,0,.6); background:#0a0e1e; }
+  .stillCard img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .stillCard img.contain { object-fit:contain; }
   #vignette { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 44%, transparent 52%, rgba(0,0,0,.5) 100%); }
   /* header */
   #formChip { position:absolute; left:56px; top:44px; z-index:40; padding:12px 26px;
@@ -108,7 +124,7 @@
 <div id="root" data-composition-id="main" data-start="0" data-duration="__DURATION__" data-width="1920" data-height="1080">
   <div class="clip" data-start="0" data-duration="__DURATION__" data-track-index="0" style="position:absolute;inset:0;">
     <div id="sky"></div><div id="glowC"></div><div id="deep"></div>
-    <div id="envLayer"></div><div id="motesBack"></div>
+    <div id="envLayer"></div><div id="worldFx"></div><div id="motesBack"></div>
     <div id="stageLayer"></div>
     <div id="clipLayer"></div><div id="clipVeil"></div>
     <div id="motesFront"></div><div id="vignette"></div>
@@ -117,6 +133,7 @@
     <div id="fxLayer"></div>
     <div id="quoteCard"><div id="quoteHead">POKÉDEX ENTRY</div><div id="quoteText"></div><div id="quoteSrc"></div></div>
     <div id="titleCard"><div id="titleBig"></div><div id="titleSub"></div></div>
+    <div id="evoFlash"></div>
     <div id="capWrap"></div>
   </div>
 </div>
@@ -149,6 +166,35 @@ if (prim.world.env === 'storm' || sec.world.env === 'storm') {
     env.appendChild(c);
   }
 }
+/* world FX layers: sandstorm / future grid / dust band, gated by config windows */
+const worldFx = $('#worldFx');
+(C.envFX || []).forEach((fx, fi) => {
+  const host = document.createElement('div');
+  host.id = 'envfx' + fi;
+  host.style.cssText = 'position:absolute; inset:0; opacity:0;';
+  if (fx.kind === 'sand') {
+    for (let i = 0; i < 42; i++) {
+      const p = document.createElement('div'); p.className = 'sandP';
+      const w = 120 + (i * 67) % 260;
+      p.style.width = w + 'px';
+      p.style.left = ((i * 431) % 2100 - 200) + 'px';
+      p.style.top = ((i * 197) % 1080) + 'px';
+      p.dataset.speed = 1400 + (i * 211) % 1200;
+      host.appendChild(p);
+    }
+  } else if (fx.kind === 'future') {
+    const g = document.createElement('div'); g.className = 'gridFloor'; host.appendChild(g);
+    for (let i = 0; i < 4; i++) {
+      const pl = document.createElement('div'); pl.className = 'pillar';
+      pl.style.left = (180 + i * 470) + 'px'; pl.style.top = '120px'; pl.style.height = '560px';
+      host.appendChild(pl);
+    }
+  } else if (fx.kind === 'dust') {
+    const d = document.createElement('div'); d.className = 'dustBand'; host.appendChild(d);
+  }
+  worldFx.appendChild(host);
+});
+
 /* motes: seeded */
 let seed = 1234567;
 const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
@@ -182,8 +228,17 @@ const stage = $('#stageLayer');
   pool.id = 'pool' + i; stage.appendChild(pool);
   const plate = document.createElement('div'); plate.className = 'heroPlate'; plate.id = 'hero' + i;
   plate.style.cssText = `left:${h.x}px; top:${h.y}px; width:${h.size}px; height:${h.size}px; opacity:0;`;
-  plate.innerHTML = `<img class="artImg" src="assets/${h.art}"/><img class="silImg" src="assets/${h.sil}" style="opacity:${h.silUntil ? 1 : 0}"/>`;
+  plate.innerHTML = `<img class="artImg" src="assets/${h.art}"/><img class="silImg" src="assets/${h.sil}" style="opacity:${h.silUntil ? 1 : 0}"/>` +
+    (h.white ? `<img class="whiteImg" src="assets/${h.white}" style="opacity:0"/>` : '');
   stage.appendChild(plate);
+  if (h.jet) {
+    for (let j = 0; j < 14; j++) {
+      const p = document.createElement('div'); p.className = 'jetP'; p.id = 'jet' + i + '_' + j;
+      const s = 16 + (j * 37) % 30;
+      p.style.cssText = `width:${s}px; height:${s}px; left:${h.x + h.size/2 - s/2}px; top:${h.y + h.size*0.88}px; background:${j % 3 ? 'rgba(255,170,60,.85)' : 'rgba(255,240,210,.9)'}; opacity:0; z-index:13;`;
+      stage.appendChild(p);
+    }
+  }
 });
 
 /* ---------- clips ---------- */
@@ -203,6 +258,20 @@ const clipLayer = $('#clipLayer');
     const tag = document.createElement('div'); tag.className = 'clipTag'; tag.id = 'clipTag' + i;
     tag.textContent = cl.label;
     tag.style.cssText = cl.mode === 'framed' ? `left:${cl.x + 18}px; top:${cl.y + 16}px;` : 'left:56px; bottom:150px;';
+    clipLayer.appendChild(tag);
+  }
+});
+
+/* ---------- B-roll still cards ---------- */
+(C.stills || []).forEach((st, i) => {
+  const host = document.createElement('div'); host.className = 'stillCard'; host.id = 'still' + i;
+  host.style.cssText = `left:${st.x}px; top:${st.y}px; width:${st.w}px; height:${st.h}px;`;
+  host.innerHTML = `<img class="${st.fit === 'contain' ? 'contain' : ''}" src="assets/${st.img}"/>`;
+  clipLayer.appendChild(host);
+  if (st.label) {
+    const tag = document.createElement('div'); tag.className = 'clipTag'; tag.id = 'stillTag' + i;
+    tag.textContent = st.label;
+    tag.style.cssText = `left:${st.x + 18}px; top:${st.y + 16}px;`;
     clipLayer.appendChild(tag);
   }
 });
@@ -230,12 +299,21 @@ if (C.formLabel) { $('#formChip').innerHTML = C.formLabel; }
 if (C.nameBlock) {
   $('#pokeName').textContent = C.nameBlock.name;
   $('#pokeSub').textContent = C.nameBlock.sub || '';
-  (C.nameBlock.pills || []).forEach(tn => {
-    const t = TYPES[tn]; const p = document.createElement('div'); p.className = 'pill';
+  const buildPills = (row, list, cls) => (list || []).forEach(tn => {
+    const t = TYPES[tn]; const p = document.createElement('div'); p.className = 'pill ' + (cls || '');
     p.textContent = tn.toUpperCase();
     p.style.background = `linear-gradient(180deg, ${t.pill[0]}, ${t.pill[1]} 55%, ${t.pill[2]})`;
-    $('#pillRow').appendChild(p);
+    row.appendChild(p);
   });
+  buildPills($('#pillRow'), C.nameBlock.pills, 'pillA');
+  if (C.pillSwap) {
+    /* second pill row overlays the first inside #pillRow; crossfaded at pillSwap.at */
+    $('#pillRow').style.position = 'relative';
+    const rowB = document.createElement('div'); rowB.id = 'pillRowB';
+    rowB.style.cssText = 'display:flex; gap:14px; opacity:0; position:absolute; left:0; top:0;';
+    buildPills(rowB, C.pillSwap.pills, 'pillB');
+    $('#pillRow').appendChild(rowB);
+  }
 }
 (C.headlines || []).forEach((h, i) => {
   const d = document.createElement('div'); d.className = 'headline' + (h.silver ? ' silver' : '');
@@ -292,13 +370,57 @@ tl.to('#brandChip', { opacity: 1, duration: .5 }, 0.3);
     tl.to(plate, { y: -13, duration: 1.3, yoyo: true, repeat: reps * 2 - 1, ease: 'sine.inOut' }, h.idle[0]);
   }
   if (h.punch) tl.to(plate, { scale: 1.045, duration: .3, yoyo: true, repeat: 1, ease: 'power2.inOut' }, h.punch);
+  if (h.evoIn) {
+    /* evolution arrival: white silhouette + flash, resolving into color */
+    tl.set(plate + ' .whiteImg', { opacity: 1 }, h.in);
+    tl.to('#evoFlash', { opacity: .85, duration: .1 }, h.in + .3);
+    tl.to('#evoFlash', { opacity: 0, duration: .5 }, h.in + .42);
+    tl.to(plate + ' .whiteImg', { opacity: 0, duration: .4 }, h.in + .45);
+  }
+  if (h.evoOutAt) {
+    /* evolution departure: hero whites out into the flash that ends the section */
+    tl.to(plate + ' .whiteImg', { opacity: 1, duration: .45, ease: 'power1.in' }, h.evoOutAt);
+    tl.to('#evoFlash', { opacity: .9, duration: .18 }, h.evoOutAt + .5);
+    tl.to('#evoFlash', { opacity: 0, duration: .01 }, h.evoOutAt + .7);
+  }
+  if (h.jet) {
+    for (let j = 0; j < 14; j++) {
+      const p = '#jet' + i + '_' + j;
+      const ang = (j / 13 - .5) * 1.5;
+      tl.fromTo(p, { opacity: .95, x: 0, y: 0, scale: 1 },
+        { opacity: 0, x: Math.sin(ang) * 190, y: 300 + (j % 4) * 46, scale: .3, duration: .62, ease: 'power2.out' }, h.jet.at + j * .012);
+    }
+    tl.to(plate, { y: -34, duration: .22, yoyo: true, repeat: 1, ease: 'power2.out' }, h.jet.at);
+  }
   if (h.out) tl.to(plate, { opacity: 0, scale: .95, duration: .4 }, h.out);
   if (h.out) tl.to('#glow' + i, { opacity: 0, duration: .4 }, h.out);
 });
 if (C.nameBlock) {
   tl.fromTo('#nameBlock', { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: .5 }, C.nameBlock.at);
   if (C.nameBlock.out) tl.to('#nameBlock', { opacity: 0, duration: .4 }, C.nameBlock.out);
+  if (C.pillSwap) {
+    tl.to('#pillRow .pillA', { opacity: 0, duration: .25 }, C.pillSwap.at);
+    tl.fromTo('#pillRowB', { opacity: 0, scale: .85 }, { opacity: 1, scale: 1, duration: .32, ease: 'back.out(2.2)' }, C.pillSwap.at + .1);
+  }
 }
+/* world FX windows */
+(C.envFX || []).forEach((fx, fi) => {
+  const host = '#envfx' + fi;
+  tl.to(host, { opacity: 1, duration: .8 }, fx.at);
+  if (fx.out) tl.to(host, { opacity: 0, duration: .9 }, fx.out);
+  if (fx.kind === 'sand') {
+    document.querySelectorAll(host + ' .sandP').forEach(p => {
+      const sp = parseFloat(p.dataset.speed);
+      const reps = Math.ceil(((fx.out || DUR) - fx.at) / (2600 / sp));
+      tl.fromTo(p, { x: 0 }, { x: -sp * .55, duration: 2600 / sp, repeat: Math.max(0, reps - 1), ease: 'none' }, fx.at);
+    });
+  }
+  if (fx.kind === 'future') {
+    document.querySelectorAll(host + ' .pillar').forEach((pl, pi) => {
+      tl.to(pl, { opacity: .55, duration: 1.6 + pi * .3, yoyo: true, repeat: Math.ceil(DUR / 3.2), ease: 'sine.inOut' }, fx.at);
+    });
+  }
+});
 (C.headlines || []).forEach((h, i) => {
   tl.fromTo('#hl' + i, { opacity: 0, scale: .8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: .38, ease: 'back.out(2.2)' }, h.at);
   if (h.out) tl.to('#hl' + i, { opacity: 0, duration: .35 }, h.out);
@@ -331,6 +453,15 @@ if (C.statAnim) {
   const st = { f: 0 };
   tl.to('#clip' + i, { opacity: 1, duration: .3 }, cl.at);
   if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 1, duration: .3 }, cl.at);
+  if (cl.mode === 'full' || cl.hideHud) {
+    /* keep footage clean: series HUD (name block, heroes) steps aside */
+    tl.to('#nameBlock', { opacity: 0, duration: .3 }, cl.at);
+    document.querySelectorAll('.heroPlate, .heroGlow, .pool').forEach(el => tl.to(el, { opacity: 0, duration: .3 }, cl.at));
+    tl.to('#nameBlock', { opacity: 1, duration: .35 }, cl.at + cl.dur + .05);
+    document.querySelectorAll('.heroPlate').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
+    document.querySelectorAll('.heroGlow').forEach(el => tl.to(el, { opacity: .85, duration: .35 }, cl.at + cl.dur + .05));
+    document.querySelectorAll('.pool').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
+  }
   if (cl.label) tl.to('#clipTag' + i, { opacity: 1, duration: .3 }, cl.at + .15);
   tl.to(st, { f: cl.frames - 1, duration: cl.dur, ease: 'none', onUpdate: () => {
     const idx = Math.round(st.f);
@@ -339,6 +470,12 @@ if (C.statAnim) {
   tl.to('#clip' + i, { opacity: 0, duration: .35 }, cl.at + cl.dur);
   if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 0, duration: .35 }, cl.at + cl.dur);
   if (cl.label) tl.to('#clipTag' + i, { opacity: 0, duration: .3 }, cl.at + cl.dur - .1);
+});
+(C.stills || []).forEach((st, i) => {
+  tl.fromTo('#still' + i, { opacity: 0, scale: .94, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: .4, ease: 'back.out(1.5)' }, st.at);
+  if (st.label) tl.to('#stillTag' + i, { opacity: 1, duration: .3 }, st.at + .15);
+  tl.to('#still' + i, { opacity: 0, duration: .35 }, st.out);
+  if (st.label) tl.to('#stillTag' + i, { opacity: 0, duration: .25 }, st.out - .05);
 });
 if (C.ranking) {
   C.ranking.slots.forEach((s, i) => {
