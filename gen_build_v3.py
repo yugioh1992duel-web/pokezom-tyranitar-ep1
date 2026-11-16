@@ -13,7 +13,7 @@ FIX = {'tyrannatar': 'Tyranitar', 'tyranitar': 'Tyranitar', 'larvatar': 'Larvita
        'volcanian': 'Volcanion', 'elaine': 'Alain', "elaine's": "Alain's",
        'berries': 'buries', 'sandstream': 'Sand Stream', "game's": 'games',
        'eighteats': 'It eats', 'retrawn': 'redrawn'}
-MERGE = {('pew', '-patar'): 'Pupitar', ('re', '-drawn'): 'redrawn', ('re', '-draw'): 'redraw'}
+MERGE = {('pew', '-patar'): 'Pupitar', ('re', '-drawn'): 'redrawn', ('re', '-draw'): 'redraw', ('pseudo', '-legendary'): 'pseudo-legendary'}
 
 def fix_words(ws):
     out, i = [], 0
@@ -61,9 +61,41 @@ def captions(start, end):
              [round(w['s'] - start, 2) for w in c],
              [i for i, w in enumerate(c) if w['w'].lower().strip('.,!?') in GOLD]] for c in chunks]
 
+
+# ---------- OPTICAL SCALING (tiered hero framing, user spec Nov 15) ----------
+# Heroes are placed by their ALPHA-BBOX height as a fraction of frame height,
+# anchored by art right-edge + feet line — spikes/tails/padding overflow freely.
+from PIL import Image as _Im
+_PLACE_SPEC = {  # art: (bbox height fraction of 1080, art right edge, feet y)
+ "Larvitar": (0.585, 1745, 880), "Pupitar": (0.70, 1745, 915),
+ "Tyranitar": (0.88, 1885, 972), "Mega_Tyranitar": (0.88, 1885, 976),
+ "Iron_Thorns": (0.82, 1860, 995),  # 0.82: head crest clears the top-right HUD pill (pill bottom y107; head top lands ~109) "Shadow_Tyranitar": (0.88, 1885, 985),
+ "MT": (0.85, 1860, 965), "MT2": (0.85, 1860, 965)}
+def _place(art):
+    im = _Im.open(os.path.join(B, "assets", art + ".png")).convert("RGBA")
+    W, H = im.size; bb = im.getchannel("A").getbbox()
+    frac, right, feet = _PLACE_SPEC[art]
+    k = (frac * 1080) / (bb[3] - bb[1]); S = k * max(W, H)
+    ox = (S - W * k) / 2; oy = (S - H * k) / 2
+    return dict(size=int(round(S)), x=int(round(right - ox - bb[2] * k)), y=int(round(feet - oy - bb[3] * k)))
+PLACE = {a: _place(a) for a in _PLACE_SPEC}
+def _core_fracs(art):  # red chest-plate centroid -> plate fractions (Mega burst anchor)
+    import numpy as _np
+    im = _np.asarray(_Im.open(os.path.join(B, "assets", art + ".png")).convert("RGBA")).astype(int)
+    m = (im[..., 3] > 200) & (im[..., 0] > 140) & (im[..., 1] < 100) & (im[..., 2] < 100)
+    ys, xs = _np.where(m)
+    return round(float(xs.mean()) / im.shape[1], 3), round(float(ys.mean()) / im.shape[0], 3)
+MEGA_CORE = _core_fracs("Mega_Tyranitar")
+print("optical placements:", {a: (p["size"], p["x"], p["y"]) for a, p in PLACE.items()})
+print("mega core plate fractions:", MEGA_CORE)
+
 def hero(name, size=760, x=1080, y=185, tin=0.3, tout=None, sil=0, punch=None, white=False, evoIn=False, evoOutAt=None, jet=None):
     h = {"art": name + ".png", "sil": name + "_sil.png", "x": x, "y": y, "size": size,
          "in": tin, "silUntil": sil, "idle": [tin + 1.2, 999]}
+    if name in PLACE:
+        h["size"], h["x"], h["y"] = PLACE[name]["size"], PLACE[name]["x"], PLACE[name]["y"]
+    if name == "Mega_Tyranitar":
+        h["coreX"], h["coreY"] = MEGA_CORE
     if tout is not None: h["out"] = tout
     if punch: h["punch"] = punch
     if white: h["white"] = name + "_white.png"

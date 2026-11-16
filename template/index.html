@@ -218,7 +218,7 @@ const blobAl = MOOD === 'shadow' ? [.34, .26, .30] : MOOD === 'mega' ? [.52, .48
 });
 /* MOOD mega: euphoric aura bursts + starburst behind the hero */
 if (MEGA_MOODS.includes(MOOD) && (C.heroes || []).length) {
-  const h0 = C.heroes[0], cx = h0.x + h0.size / 2, cy = h0.y + h0.size / 2, bl = $('#burstLayer');
+  const h0 = C.heroes[0], cx = h0.x + h0.size * (h0.coreX ?? 0.5), cy = h0.y + h0.size * (h0.coreY ?? 0.5), bl = $('#burstLayer');
   const sb = document.createElement('div'); sb.className = 'starburst';
   const sbS = h0.size * 2.1;
   sb.style.cssText = `left:${cx - sbS / 2}px; top:${cy - sbS / 2}px; width:${sbS}px; height:${sbS}px; background:repeating-conic-gradient(from 0deg, ${BURSTC[MOOD].star} 0deg 7deg, transparent 7deg 21deg);`;
@@ -353,7 +353,7 @@ const stage = $('#stageLayer');
 (C.heroes || []).forEach((h, i) => {
   const glow = document.createElement('div'); glow.className = 'heroGlow';
   const gw = h.size * 1.15;
-  glow.style.cssText = `left:${h.x + h.size/2 - gw/2}px; top:${h.y + h.size/2 - gw/2}px; width:${gw}px; height:${gw}px; background:radial-gradient(circle, ${MOOD_GLOW[MOOD] || (TYPES[h.glowType || C.world[0]]).mote[1]}55 0%, transparent 65%); opacity:0;`;
+  glow.style.cssText = `left:${h.x + h.size*(h.coreX ?? 0.5) - gw/2}px; top:${h.y + h.size*(h.coreY ?? 0.5) - gw/2}px; width:${gw}px; height:${gw}px; background:radial-gradient(circle, ${MOOD_GLOW[MOOD] || (TYPES[h.glowType || C.world[0]]).mote[1]}55 0%, transparent 65%); opacity:0;`;
   glow.id = 'glow' + i; stage.appendChild(glow);
   const pool = document.createElement('div'); pool.className = 'pool';
   pool.style.cssText = `left:${h.x + h.size*0.14}px; top:${h.y + h.size*0.86}px; width:${h.size*0.72}px; height:${h.size*0.13}px; background:radial-gradient(ellipse, rgba(0,0,0,.5), transparent 70%); opacity:0;`;
