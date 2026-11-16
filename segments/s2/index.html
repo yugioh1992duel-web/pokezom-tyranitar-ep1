@@ -11,8 +11,42 @@
   #glowC { position:absolute; left:50%; top:46%; width:1500px; height:900px;
     transform:translate(-50%,-50%); border-radius:50%; }
   #deep { position:absolute; inset:0; }
-  .aurora { position:absolute; left:-15%; width:130%; height:300px; border-radius:50%;
-    filter:blur(50px); opacity:.5; }
+  .aurora { position:absolute; left:-15%; width:130%; height:320px; border-radius:50%;
+    filter:blur(55px); opacity:.55; mix-blend-mode:screen; }
+  .blob { position:absolute; border-radius:50%; filter:blur(65px); pointer-events:none; opacity:.9; mix-blend-mode:screen; }
+  .bokeh { position:absolute; border-radius:50%; pointer-events:none; }
+  .smoke { position:absolute; border-radius:50%; filter:blur(30px); pointer-events:none; }
+  .burstRing { position:absolute; border-radius:50%; pointer-events:none; opacity:0; mix-blend-mode:screen; }
+  .starburst { position:absolute; border-radius:50%; pointer-events:none; opacity:0; mix-blend-mode:screen;
+    -webkit-mask-image:radial-gradient(circle, #000 0%, transparent 68%); mask-image:radial-gradient(circle, #000 0%, transparent 68%); }
+  /* MOOD: shadow — dark / evil / badass */
+  #root.mood-shadow #pokeName { background:linear-gradient(180deg,#f2efff 10%,#a99bf0 42%,#4b357f 55%,#c9bfff 95%);
+    -webkit-background-clip:text; background-clip:text; filter:drop-shadow(0 6px 26px rgba(122,60,255,.5)); }
+  #root.mood-shadow .headline { background:linear-gradient(180deg,#ffd7e8 5%,#ff3b5c 45%,#7a0f2b 58%,#ff8fab 95%);
+    -webkit-background-clip:text; background-clip:text; }
+  #root.mood-shadow #vignette { background:radial-gradient(ellipse at 50% 44%, transparent 38%, rgba(2,0,10,.8) 100%); }
+  #root.mood-shadow #pokeSub { color:#ff5c74; text-shadow:0 0 18px rgba(255,42,75,.65), 0 2px 8px rgba(0,0,0,.6); }
+  /* MOOD: mega — euphoric aura */
+  #root.mood-mega #pokeName { background:linear-gradient(180deg,#fff3c4 5%,#ffd94d 38%,#ff7a1a 58%,#ff2a4b 82%,#ffb347 100%);
+    -webkit-background-clip:text; background-clip:text; filter:drop-shadow(0 6px 26px rgba(255,150,30,.55)); }
+  #root.mood-mega #pokeSub { color:#ffcf40; text-shadow:0 0 18px rgba(255,180,40,.6), 0 2px 8px rgba(0,0,0,.55); }
+  .m-square { border-radius:2px !important; }
+  .m-hex { border-radius:0 !important; clip-path:polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+  .hexGrid { position:absolute; inset:-120px; opacity:0; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%2300f0ff' stroke-opacity='.55'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%2300f0ff' stroke-opacity='.55'/%3E%3C/svg%3E"); }
+  #root.mood-future #pokeName { background:linear-gradient(180deg,#ffffff 8%,#bffbff 34%,#00f0ff 58%,#0077ff 84%,#aef7ff 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 22px rgba(0,240,255,.45)) drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+  #root.mood-future #pokeSub { color:#ffe94d; text-shadow:0 0 18px rgba(255,220,40,.6), 0 2px 8px rgba(0,0,0,.55); }
+  #root.mood-future .headline { filter:drop-shadow(0 0 20px rgba(0,240,255,.4)) drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+  #root.mood-mecha #pokeName { background:linear-gradient(180deg,#f7fafc 6%,#aeb9c2 38%,#4c5a66 54%,#ffd94d 80%,#9c7208 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 16px rgba(0,0,0,.55)); }
+  #root.mood-past #pokeName { background:linear-gradient(180deg,#ffe9b0 6%,#ffb35c 36%,#c33d12 58%,#7a1503 82%,#ffb35c 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 18px rgba(255,120,30,.35)) drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+  #root.mood-past #pokeSub { color:#ffcf8a; text-shadow:0 0 16px rgba(255,150,50,.5), 0 2px 8px rgba(0,0,0,.55); }
+  #root.mood-mega-x #pokeName { background:linear-gradient(180deg,#ffffff 5%,#bfefff 34%,#38b6ff 56%,#123a9e 82%,#7dd7ff 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 24px rgba(60,170,255,.55)) drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+  #root.mood-mega-x #pokeSub { color:#aee9ff; text-shadow:0 0 18px rgba(90,200,255,.6), 0 2px 8px rgba(0,0,0,.55); }
+  #root.mood-mega-y #pokeName { background:linear-gradient(180deg,#fff6d8 5%,#ffd94d 34%,#ff7a1a 56%,#d61f06 84%,#ffb347 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 24px rgba(255,140,40,.55)) drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+  #root.mood-mega-y #pokeSub { color:#ffb35c; text-shadow:0 0 18px rgba(255,150,50,.6), 0 2px 8px rgba(0,0,0,.55); }
+  #root.mood-gmax #pokeName { background:linear-gradient(180deg,#ffffff 8%,#ffb3c8 36%,#ff2e6a 60%,#7a0f35 86%,#ff8ab0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 24px rgba(255,46,106,.5)) drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+  #root.mood-gmax #pokeSub { color:#ff8ab0; text-shadow:0 0 18px rgba(255,80,140,.55), 0 2px 8px rgba(0,0,0,.55); }
+  #root.mood-gmax #vignette { background:radial-gradient(ellipse at 50% 44%, transparent 36%, rgba(20,0,12,.82) 100%); }
+  #root.mood-mega .headline { filter:drop-shadow(0 4px 22px rgba(255,170,0,.5)); }
   .mote { position:absolute; border-radius:50%; pointer-events:none; }
   .m-ring { background:transparent !important; border:3px solid; }
   .m-leaf { border-radius:80% 4px 80% 4px !important; }
@@ -75,6 +109,8 @@
   .chip .gold { color:#ffd94d; } .chip .red { color:#ff7a7a; } .chip .grn { color:#8dffa8; }
   .chip .pur { color:#cfa6ff; }
   /* quote card */
+  #loadBar { position:absolute; left:70px; top:878px; width:560px; height:24px; border:2px solid rgba(255,255,255,.4); border-radius:12px; background:rgba(8,12,20,.55); opacity:0; z-index:37; overflow:hidden; }
+  #loadFill { height:100%; width:100%; transform-origin:left center; transform:scaleX(0); background:linear-gradient(90deg,#ffd94d,#ff7a1a); }
   #quoteCard { position:absolute; left:70px; top:545px; width:1010px; z-index:36; opacity:0; background:rgba(10,16,14,.88); border:2px solid rgba(120,255,170,.35);
     border-radius:24px; padding:44px 54px; box-shadow:0 30px 80px rgba(0,0,0,.65); }
   #quoteHead { display:inline-block; padding:8px 20px; border-radius:8px; background:#1d3a2a;
@@ -124,13 +160,16 @@
 <div id="root" data-composition-id="main" data-start="0" data-duration="54.68" data-width="1920" data-height="1080">
   <div class="clip" data-start="0" data-duration="54.68" data-track-index="0" style="position:absolute;inset:0;">
     <div id="sky"></div><div id="glowC"></div><div id="deep"></div>
+    <div id="blobLayer"></div>
     <div id="envLayer"></div><div id="worldFx"></div><div id="motesBack"></div>
+    <div id="burstLayer"></div>
     <div id="stageLayer"></div>
     <div id="clipLayer"></div><div id="clipVeil"></div>
     <div id="motesFront"></div><div id="vignette"></div>
     <div id="formChip"></div><div id="brandChip">EVERY POKÉMON · EXPLAINED &amp; RANKED</div>
     <div id="nameBlock"><div id="pokeName"></div><div id="pokeSub"></div><div id="pillRow"></div></div>
     <div id="fxLayer"></div>
+    <div id="loadBar"><div id="loadFill"></div></div>
     <div id="quoteCard"><div id="quoteHead">POKÉDEX ENTRY</div><div id="quoteText"></div><div id="quoteSrc"></div></div>
     <div id="titleCard"><div id="titleBig"></div><div id="titleSub"></div></div>
     <div id="evoFlash"></div>
@@ -139,25 +178,58 @@
 </div>
 <script src="assets/gsap.min.js"></script>
 <script>
-const C = {"id": "s2", "start": 91.74, "dur": 54.68, "types": ["Rock", "Ground"], "formLabel": "FORM 2 OF 6", "envFX": [{"kind": "dust", "at": 0.0, "out": 54.5}], "heroes": [{"art": "Pupitar.png", "sil": "Pupitar_sil.png", "x": 1080, "y": 185, "size": 760, "in": 0.3, "silUntil": 1.15, "idle": [1.5, 999], "punch": 24.1, "white": "Pupitar_white.png", "evoIn": true, "evoOutAt": 53.5, "jet": {"at": 24.05}}], "nameBlock": {"name": "PUPITAR", "sub": "THE HARD SHELL POK\u00c9MON \u00b7 #247", "pills": ["Rock", "Ground"], "at": 0.5}, "headlines": [{"at": 23.6, "html": "A COCOON WITH<br/>A <span class='gold'>JET ENGINE</span>", "out": 30.5, "x": 70, "y": 560, "size": 76}, {"at": 35.7, "html": "IT'S NOT SLEEPING.<br/>IT'S <span class='gold'>LOADING.</span>", "out": 41.5, "x": 70, "y": 560, "size": 76}], "chips": [{"at": 41.7, "html": "EVOLVES AT LEVEL <span class='gold'>55</span>", "out": 49.0, "x": 70, "y": 880}], "world": ["Rock", "Ground"], "duration": 54.68, "captions": [[0.0, "Larvitar becomes Pupitar. And Pupitar is where this line", [0.0, 0.36, 0.76, 2.1, 2.16, 2.78, 2.96, 3.22, 3.44], []], [3.74, "gets weird. It's a cocoon.", [3.74, 3.98, 5.34, 5.66, 5.82], [4]], [6.56, "It can't walk. It has no legs it can", [6.56, 6.76, 7.06, 7.68, 7.78, 7.94, 8.2, 8.38, 8.52], []], [8.64, "use. And it is still one of the most", [8.64, 9.24, 9.4, 9.5, 9.62, 9.94, 10.22, 10.3, 10.38], []], [10.5, "dangerous things on the mountain.", [10.5, 11.0, 11.32, 11.56, 11.64], [4]], [12.26, "Its shell is as hard as bedrock.", [12.26, 12.36, 12.6, 12.86, 13.1, 13.44, 13.7], []], [14.52, "Its thrashing can topple a mountain.", [14.52, 14.62, 15.34, 15.66, 16.22, 16.52], [5]], [17.08, "That's the Pok\u00e9dex's words, not mine.", [17.08, 17.22, 17.34, 17.78, 18.18, 18.26], []], [18.82, "And it moves by building up gas inside its", [18.82, 19.08, 19.18, 19.34, 19.6, 19.9, 20.1, 20.36, 20.76], []], [21.14, "body and blasting it out under pressure, launching itself", [21.14, 21.38, 21.56, 21.96, 22.24, 22.36, 22.52, 23.12, 23.4], []], [23.74, "like a rocket. A rocket.", [23.74, 24.02, 24.2, 25.04, 25.22], [2, 4]], [25.98, "This is a cocoon with a jet engine.", [25.98, 26.18, 26.28, 26.36, 26.72, 26.9, 27.08, 27.38], [3, 6, 7]], [28.36, "And it's not even empty in there.", [28.36, 28.54, 28.72, 28.88, 29.06, 29.58, 29.86], []], [30.52, "The Pok\u00e9dex says it already has arms and legs", [30.52, 30.62, 31.08, 31.34, 31.56, 31.86, 32.16, 32.42, 32.66], []], [32.84, "forming under the shell. It's not sleeping.", [32.84, 33.28, 33.74, 33.9, 34.64, 34.8, 34.9], []], [35.94, "It's loading. But here's the catch.", [35.94, 36.16, 37.36, 37.48, 37.72, 37.82], [1]], [38.48, "Pupitar is the longest weight in the family.", [38.48, 38.84, 39.02, 39.18, 39.62, 39.96, 40.16, 40.24], []], [40.88, "It doesn't evolve until level 55.", [40.88, 41.02, 41.24, 41.42, 41.7, 42.0], [5]], [43.38, "One of the latest evolutions of any Pok\u00e9mon ever.", [43.38, 43.48, 43.56, 43.64, 43.96, 44.4, 44.68, 44.82, 45.1], []], [46.14, "You carry this angry rock for 25 levels.", [46.14, 46.48, 46.76, 47.08, 47.5, 48.14, 48.4, 49.06], []], [50.48, "And then the mountain wakes up.", [50.48, 50.6, 50.78, 51.54, 51.92, 52.48], [3]], [53.44, "Level 55,", [53.44, 53.56], [1]]]};
+const C = {"id": "s2", "start": 91.74, "dur": 54.68, "types": ["Rock", "Ground"], "formLabel": "FORM 2 OF 6", "envFX": [{"kind": "dust", "at": 0.0, "out": 54.5}], "heroes": [{"art": "Pupitar.png", "sil": "Pupitar_sil.png", "x": 1080, "y": 185, "size": 760, "in": 0.3, "silUntil": 1.15, "idle": [1.5, 999], "punch": 24.1, "white": "Pupitar_white.png", "evoIn": true, "evoOutAt": 53.5, "jet": {"at": 24.05}}], "nameBlock": {"name": "PUPITAR", "sub": "THE HARD SHELL POK\u00c9MON \u00b7 #247", "pills": ["Rock", "Ground"], "at": 0.5}, "quoteCard": {"at": 12.2, "text": "Its shell is as hard as sheet rock, and it is also very strong. Its thrashing can topple a mountain.", "src": "POK\u00c9DEX \u2014 POK\u00c9MON GOLD", "out": 18.6}, "headlines": [{"at": 23.6, "html": "A COCOON WITH<br/>A <span class='gold'>JET ENGINE</span>", "out": 30.5, "x": 70, "y": 560, "size": 76}, {"at": 35.7, "html": "IT'S NOT SLEEPING.<br/>IT'S <span class='gold'>LOADING.</span>", "out": 41.5, "x": 70, "y": 560, "size": 76}], "loadBar": {"at": 35.7, "out": 41.5}, "chips": [{"at": 41.7, "html": "EVOLVES AT LEVEL <span class='gold'>55</span>", "out": 49.0, "x": 70, "y": 880}], "world": ["Rock", "Ground"], "duration": 54.68, "captions": [[0.0, "Larvitar becomes Pupitar. And Pupitar is where this line", [0.0, 0.36, 0.76, 2.1, 2.16, 2.78, 2.96, 3.22, 3.44], []], [3.74, "gets weird. It's a cocoon.", [3.74, 3.98, 5.34, 5.66, 5.82], [4]], [6.56, "It can't walk. It has no legs it can", [6.56, 6.76, 7.06, 7.68, 7.78, 7.94, 8.2, 8.38, 8.52], []], [8.64, "use. And it is still one of the most", [8.64, 9.24, 9.4, 9.5, 9.62, 9.94, 10.22, 10.3, 10.38], []], [10.5, "dangerous things on the mountain.", [10.5, 11.0, 11.32, 11.56, 11.64], [4]], [12.26, "Its shell is as hard as bedrock.", [12.26, 12.36, 12.6, 12.86, 13.1, 13.44, 13.7], []], [14.52, "Its thrashing can topple a mountain.", [14.52, 14.62, 15.34, 15.66, 16.22, 16.52], [5]], [17.08, "That's the Pok\u00e9dex's words, not mine.", [17.08, 17.22, 17.34, 17.78, 18.18, 18.26], []], [18.82, "And it moves by building up gas inside its", [18.82, 19.08, 19.18, 19.34, 19.6, 19.9, 20.1, 20.36, 20.76], []], [21.14, "body and blasting it out under pressure, launching itself", [21.14, 21.38, 21.56, 21.96, 22.24, 22.36, 22.52, 23.12, 23.4], []], [23.74, "like a rocket. A rocket.", [23.74, 24.02, 24.2, 25.04, 25.22], [2, 4]], [25.98, "This is a cocoon with a jet engine.", [25.98, 26.18, 26.28, 26.36, 26.72, 26.9, 27.08, 27.38], [3, 6, 7]], [28.36, "And it's not even empty in there.", [28.36, 28.54, 28.72, 28.88, 29.06, 29.58, 29.86], []], [30.52, "The Pok\u00e9dex says it already has arms and legs", [30.52, 30.62, 31.08, 31.34, 31.56, 31.86, 32.16, 32.42, 32.66], []], [32.84, "forming under the shell. It's not sleeping.", [32.84, 33.28, 33.74, 33.9, 34.64, 34.8, 34.9], []], [35.94, "It's loading. But here's the catch.", [35.94, 36.16, 37.36, 37.48, 37.72, 37.82], [1]], [38.48, "Pupitar is the longest weight in the family.", [38.48, 38.84, 39.02, 39.18, 39.62, 39.96, 40.16, 40.24], []], [40.88, "It doesn't evolve until level 55.", [40.88, 41.02, 41.24, 41.42, 41.7, 42.0], [5]], [43.38, "One of the latest evolutions of any Pok\u00e9mon ever.", [43.38, 43.48, 43.56, 43.64, 43.96, 44.4, 44.68, 44.82, 45.1], []], [46.14, "You carry this angry rock for 25 levels.", [46.14, 46.48, 46.76, 47.08, 47.5, 48.14, 48.4, 49.06], []], [50.48, "And then the mountain wakes up.", [50.48, 50.6, 50.78, 51.54, 51.92, 52.48], [3]], [53.44, "Level 55,", [53.44, 53.56], [1]]]};
 const TYPES = {"Normal": {"pill": ["#d8d6b8", "#a8a77a", "#7d7c52", "#5c5b3a"], "mote": ["m-star", "#ffffff"], "aurora": ["255,240,200", "200,200,180"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffffff", "aura": "255,255,255"}, "world": {"sky": ["#292536", "#1d1a26", "#131020", "#08070f"], "glow": "rgba(200,190,255,.12)", "deep": "rgba(45,40,75,.5)", "env": "void"}}, "Fire": {"pill": ["#ffb066", "#ee8130", "#c85a10", "#96400a"], "mote": ["m-orb", "#ff9a3d"], "aurora": ["255,140,50", "255,80,40"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff9a3d", "aura": "255,154,61"}, "world": {"sky": ["#38150c", "#2b100a", "#1c0a06", "#0d0403"], "glow": "rgba(255,130,50,.16)", "deep": "rgba(80,20,5,.5)", "env": "ember"}}, "Water": {"pill": ["#a8c8ff", "#6390f0", "#3a68c8", "#2a4c96"], "mote": ["m-ring", "#a8dcff"], "aurora": ["90,160,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#a8dcff", "aura": "168,220,255"}, "world": {"sky": ["#0d4266", "#093049", "#051e33", "#020c18"], "glow": "rgba(90,200,255,.17)", "deep": "rgba(2,24,48,.55)", "env": "sea"}}, "Electric": {"pill": ["#ffe066", "#f7d02c", "#d9a400", "#a87e00"], "mote": ["m-spark", "#ffd94d"], "aurora": ["255,217,77", "255,170,0"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ffd94d", "aura": "255,217,77"}, "world": {"sky": ["#262262", "#1b1a52", "#121240", "#070722"], "glow": "rgba(140,130,255,.18)", "deep": "rgba(40,40,120,.5)", "env": "storm"}}, "Grass": {"pill": ["#b5e48c", "#7ac74c", "#57a02e", "#3f7a20"], "mote": ["m-leaf", "#7ee787"], "aurora": ["140,230,140", "90,200,160"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#7ee787", "aura": "126,231,135"}, "world": {"sky": ["#14351f", "#0f2a19", "#081c10", "#040f08"], "glow": "rgba(110,255,160,.13)", "deep": "rgba(10,50,25,.5)", "env": "void"}}, "Ice": {"pill": ["#d8f4f2", "#96d9d6", "#64b8b4", "#478a88"], "mote": ["m-gem", "#bfefff"], "aurora": ["170,240,255", "140,200,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#bfefff", "aura": "191,239,255"}, "world": {"sky": ["#123446", "#0e2a3a", "#081c29", "#040e16"], "glow": "rgba(170,230,255,.18)", "deep": "rgba(20,60,90,.5)", "env": "void"}}, "Fighting": {"pill": ["#f08078", "#c22e28", "#96201c", "#6e1613"], "mote": ["m-orb", "#ff6b4a"], "aurora": ["255,110,70", "220,60,50"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#ff6b4a", "aura": "255,107,74"}, "world": {"sky": ["#381c0d", "#2b1509", "#1c0d05", "#0e0603"], "glow": "rgba(255,150,80,.14)", "deep": "rgba(70,35,10,.5)", "env": "void"}}, "Poison": {"pill": ["#d88fd8", "#a33ea1", "#7c2a7c", "#5a1d5a"], "mote": ["m-ring", "#c77dff"], "aurora": ["199,125,255", "140,80,220"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#c77dff", "aura": "199,125,255"}, "world": {"sky": ["#2a1242", "#1e0f2e", "#130826", "#08040f"], "glow": "rgba(190,110,255,.15)", "deep": "rgba(50,15,90,.5)", "env": "void"}}, "Ground": {"pill": ["#f2dd9a", "#e2bf65", "#c09e42", "#8f742e"], "mote": ["m-orb", "#e8cc7a"], "aurora": ["240,210,130", "210,170,90"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8cc7a", "aura": "232,204,122"}, "world": {"sky": ["#33200f", "#241708", "#170d05", "#0b0603"], "glow": "rgba(255,200,110,.13)", "deep": "rgba(70,45,15,.5)", "env": "void"}}, "Flying": {"pill": ["#d3c6ff", "#a98ff3", "#8266d8", "#5f45ab"], "mote": ["m-leaf", "#e8f4ff"], "aurora": ["190,200,255", "150,220,255"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#e8f4ff", "aura": "232,244,255"}, "world": {"sky": ["#16304f", "#10233d", "#0a1729", "#050b14"], "glow": "rgba(150,200,255,.16)", "deep": "rgba(25,55,100,.5)", "env": "void"}}, "Psychic": {"pill": ["#ff9ebb", "#f95587", "#d12c64", "#9c1f49"], "mote": ["m-orb", "#ff8fb8"], "aurora": ["255,120,180", "190,90,255"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#ff8fb8", "aura": "255,143,184"}, "world": {"sky": ["#33163f", "#260f33", "#180a24", "#0b0512"], "glow": "rgba(255,140,220,.15)", "deep": "rgba(70,20,100,.5)", "env": "void"}}, "Bug": {"pill": ["#d4e86a", "#a6b91a", "#7f9112", "#5c6a0c"], "mote": ["m-orb", "#d8f76a"], "aurora": ["200,240,110", "140,220,120"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#d8f76a", "aura": "216,247,106"}, "world": {"sky": ["#1a3312", "#12260e", "#0a1a07", "#050d04"], "glow": "rgba(170,255,120,.13)", "deep": "rgba(20,55,15,.5)", "env": "canopy"}}, "Rock": {"pill": ["#ddd29a", "#b6a136", "#8f7d24", "#665a1a"], "mote": ["m-gem", "#cfc48a"], "aurora": ["210,195,140", "170,155,100"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#cfc48a", "aura": "207,196,138"}, "world": {"sky": ["#2c2417", "#201a12", "#140f09", "#0a0705"], "glow": "rgba(220,190,130,.12)", "deep": "rgba(60,48,28,.5)", "env": "void"}}, "Ghost": {"pill": ["#b3a1d6", "#735797", "#553f73", "#3d2c54"], "mote": ["m-orb", "#b18cff"], "aurora": ["150,110,230", "110,80,200"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#b18cff", "aura": "177,140,255"}, "world": {"sky": ["#20133c", "#160f2b", "#0e0820", "#06040f"], "glow": "rgba(150,120,255,.16)", "deep": "rgba(35,20,80,.5)", "env": "void"}}, "Dragon": {"pill": ["#b394ff", "#7d55e0", "#5530b8", "#3f2094"], "mote": ["m-orb", "#57f7d6"], "aurora": ["96,80,255", "64,224,208"], "attack": {"archetype": "beam", "core": "#ffffff", "sheath": "#57f7d6", "aura": "87,247,214"}, "world": {"sky": ["#232c58", "#1a2350", "#121a40", "#070b1e"], "glow": "rgba(120,130,255,.20)", "deep": "rgba(50,60,140,.5)", "env": "void"}}, "Dark": {"pill": ["#a08b78", "#705746", "#544134", "#3a2d24"], "mote": ["m-orb", "#8a7fd6"], "aurora": ["110,95,180", "70,60,130"], "attack": {"archetype": "swarm", "core": "#ffffff", "sheath": "#8a7fd6", "aura": "138,127,214"}, "world": {"sky": ["#12121f", "#0b0b14", "#07070f", "#030308"], "glow": "rgba(110,100,200,.12)", "deep": "rgba(15,15,35,.55)", "env": "void"}}, "Steel": {"pill": ["#e2e2f0", "#b7b7ce", "#8f8fae", "#666680"], "mote": ["m-star", "#e8ecf4"], "aurora": ["200,210,235", "160,180,220"], "attack": {"archetype": "slam", "core": "#ffffff", "sheath": "#e8ecf4", "aura": "232,236,244"}, "world": {"sky": ["#1c242e", "#141a22", "#0d1118", "#05070b"], "glow": "rgba(190,210,235,.14)", "deep": "rgba(35,45,60,.5)", "env": "void"}}, "Fairy": {"pill": ["#ffc2dd", "#d685ad", "#b35685", "#853d63"], "mote": ["m-orb", "#ffb3e2"], "aurora": ["255,150,210", "190,140,255"], "attack": {"archetype": "field", "core": "#ffffff", "sheath": "#ffb3e2", "aura": "255,179,226"}, "world": {"sky": ["#3a1c40", "#2b1530", "#1c0c22", "#0e0512"], "glow": "rgba(255,170,220,.17)", "deep": "rgba(80,30,90,.5)", "env": "void"}}};
 const $ = s => document.querySelector(s);
 const DUR = C.duration;
 
 /* ---------- world ---------- */
 const prim = TYPES[C.world[0]], sec = TYPES[C.world[1]] || prim;
-const sky = prim.world.sky;
+const MOOD = C.mood || '';
+if (MOOD) $('#root').classList.add('mood-' + MOOD);
+const MEGA_MOODS = ['mega', 'mega-x', 'mega-y'];
+const BURSTC = { mega: { ring: ['#ffae00', '#ff2a85'], star: 'rgba(255,205,90,.3)', surge: ['#ffd94d', '#c86bff'] }, 'mega-x': { ring: ['#7dd7ff', '#3d7bff'], star: 'rgba(90,200,255,.34)', surge: ['#7dd7ff', '#3d7bff'] }, 'mega-y': { ring: ['#ffd94d', '#ff6a3d'], star: 'rgba(255,150,50,.34)', surge: ['#ffd94d', '#ff5a3d'] } };
+const MOOD_GLOW = { shadow: '#7a3cff', future: '#00c8ff', past: '#ff8a3d', 'mega-x': '#3d9bff', 'mega-y': '#ff8a3d', gmax: '#ff2e6a' };
+const AMB = MOOD === 'future' ? { legF: 1, blobF: .85, aurF: .85 } : MOOD === 'past' ? { legF: 1.15, blobF: 1.2, aurF: 1.15 } : MOOD === 'gmax' ? { legF: 1.25, blobF: 1.3, aurF: 1.2 } : MOOD === 'shadow' ? { legF: 1.55, blobF: 1.7, aurF: 1.6 } : MOOD === 'mega' ? { legF: .68, blobF: .75, aurF: .8 } : { legF: 1, blobF: 1, aurF: 1 };
+const sky = MOOD === 'shadow' ? ['#0d0618', '#08030f', '#050208', '#020104'] : MOOD === 'mega' ? ['#2a0a2e', '#1c1030', '#12081f', '#07030d'] : MOOD === 'future' ? ['#071324', '#0a1a33', '#140a2e', '#05030f'] : MOOD === 'past' ? ['#2b0d07', '#1c0703', '#120409', '#050202'] : MOOD === 'mega-x' ? ['#061a3a', '#0a1030', '#0d0724', '#04030d'] : MOOD === 'mega-y' ? ['#33100a', '#2a0d1e', '#170818', '#07030d'] : MOOD === 'gmax' ? ['#2b0616', '#1d0a24', '#12040f', '#050208'] : C.world[0] === 'Rock' ? ['#2a1808', '#25102a', '#1c0d36', '#0d0618'] : prim.world.sky;
 $('#sky').style.background = `linear-gradient(180deg, ${sky[0]} 0%, ${sky[1]} 42%, ${sky[2]} 74%, ${sky[3]} 100%)`;
 $('#glowC').style.background = `radial-gradient(ellipse, ${prim.world.glow} 0%, transparent 65%)`;
-$('#deep').style.background = `radial-gradient(ellipse 120% 55% at 50% 108%, ${prim.world.deep} 0%, transparent 70%)`;
+$('#deep').style.background = MOOD === 'shadow'
+  ? `radial-gradient(ellipse 120% 55% at 50% 108%, rgba(70,20,130,.55) 0%, transparent 70%)`
+  : `radial-gradient(ellipse 120% 55% at 50% 108%, ${prim.world.deep} 0%, transparent 70%)`;
 const env = $('#envLayer');
-[0,1,2].forEach(i => {
+[0,1,2,3].forEach(i => {
   const a = document.createElement('div'); a.className = 'aurora';
-  const col = i === 1 ? sec.aurora : prim.aurora;
-  a.style.top = (6 + i * 17) + '%';
-  a.style.background = `linear-gradient(90deg, transparent, rgba(${col},.34), rgba(${col},.12), transparent)`;
+  const col = MOOD === 'shadow' ? (i % 2 === 1 ? ['200,40,80', '120,10,40'] : ['120,60,220', '60,20,110']) : MOOD === 'mega' ? (i % 2 === 1 ? ['255,170,0', '200,90,0'] : ['255,80,180', '140,40,200']) : MOOD === 'future' ? (i % 2 === 1 ? ['255,230,60', '255,170,0'] : ['0,240,255', '0,120,255']) : MOOD === 'past' ? (i % 2 === 1 ? ['255,90,40', '170,40,10'] : ['255,170,60', '200,90,20']) : MOOD === 'mega-x' ? (i % 2 === 1 ? ['120,80,255', '60,30,200'] : ['80,200,255', '30,90,255']) : MOOD === 'mega-y' ? (i % 2 === 1 ? ['255,200,60', '255,120,0'] : ['255,130,40', '220,60,0']) : MOOD === 'gmax' ? (i % 2 === 1 ? ['255,40,60', '160,10,40'] : ['255,60,120', '200,20,80']) : (i % 2 === 1 ? sec.aurora : prim.aurora);
+  a.style.top = (2 + i * 15) + '%';
+  const al = MOOD === 'shadow' ? [.34, .14] : MOOD === 'mega' || MOOD === 'mega-x' || MOOD === 'mega-y' ? [.7, .3] : MOOD === 'future' ? [.6, .26] : MOOD === 'past' ? [.5, .22] : MOOD === 'gmax' ? [.55, .24] : [.7, .32];
+  a.style.background = `linear-gradient(90deg, transparent, rgba(${col[0]},${al[0]}), rgba(${col[1]},${al[1]}), transparent)`;
   env.appendChild(a);
 });
+/* ambient color blobs: big soft type-colored washes that slowly orbit */
+const blobHost = $('#blobLayer');
+const blobCols = MOOD === 'shadow' ? ['90,30,160', '150,20,60', '60,10,110'] : MOOD === 'mega' ? ['200,40,140', '255,170,0', '120,60,255'] : MOOD === 'future' ? ['0,180,255', '255,210,0', '120,60,255'] : MOOD === 'past' ? ['200,90,20', '255,150,40', '140,30,10'] : MOOD === 'mega-x' ? ['40,120,255', '0,220,255', '90,60,255'] : MOOD === 'mega-y' ? ['255,120,20', '255,60,40', '255,190,40'] : MOOD === 'gmax' ? ['200,20,80', '255,60,120', '120,10,60'] : [prim.aurora[0], sec.aurora[0], prim.aurora[0]];
+const blobAl = MOOD === 'shadow' ? [.34, .26, .30] : MOOD === 'mega' ? [.52, .48, .42] : MOOD === 'future' ? [.42, .34, .36] : MOOD === 'past' ? [.4, .36, .34] : MOOD === 'mega-x' || MOOD === 'mega-y' ? [.52, .47, .42] : MOOD === 'gmax' ? [.46, .4, .4] : [.62, .55, .42];
+[[1150, '-6%', '30%'], [900, '56%', '2%'], [760, '30%', '56%']].forEach(([s, l, tp], bi) => {
+  const b = document.createElement('div'); b.className = 'blob';
+  b.style.width = s + 'px'; b.style.height = s + 'px'; b.style.left = l; b.style.top = tp;
+  b.style.background = `radial-gradient(circle, rgba(${blobCols[bi]},${blobAl[bi]}) 0%, transparent 65%)`;
+  blobHost.appendChild(b);
+});
+/* MOOD mega: euphoric aura bursts + starburst behind the hero */
+if (MEGA_MOODS.includes(MOOD) && (C.heroes || []).length) {
+  const h0 = C.heroes[0], cx = h0.x + h0.size / 2, cy = h0.y + h0.size / 2, bl = $('#burstLayer');
+  const sb = document.createElement('div'); sb.className = 'starburst';
+  const sbS = h0.size * 2.1;
+  sb.style.cssText = `left:${cx - sbS / 2}px; top:${cy - sbS / 2}px; width:${sbS}px; height:${sbS}px; background:repeating-conic-gradient(from 0deg, ${BURSTC[MOOD].star} 0deg 7deg, transparent 7deg 21deg);`;
+  bl.appendChild(sb);
+  [BURSTC[MOOD].ring[0], BURSTC[MOOD].ring[1], BURSTC[MOOD].ring[0]].forEach((col, i) => {
+    const r = document.createElement('div'); r.className = 'burstRing';
+    const rs = h0.size * (0.98 + i * .18);
+    r.style.cssText = `left:${cx - rs / 2}px; top:${cy - rs / 2}px; width:${rs}px; height:${rs}px; background:radial-gradient(circle, transparent 58%, ${col} 71%, transparent 82%); filter:blur(10px);`;
+    bl.appendChild(r);
+  });
+}
 if (prim.world.env === 'storm' || sec.world.env === 'storm') {
   for (let i = 0; i < 6; i++) {
     const c = document.createElement('div'); c.className = 'cloud';
@@ -195,33 +267,93 @@ const worldFx = $('#worldFx');
   worldFx.appendChild(host);
 });
 
-/* motes: seeded */
-let seed = 1234567;
+if (MOOD === 'future') { const hg = document.createElement('div'); hg.className = 'hexGrid'; env.appendChild(hg); }
+/* ---------- particles: continuous directional flow, 3 depth layers ---------- */
+let seed = 1234567 + [...(C.formLabel || '')].reduce((a, c) => a + c.charCodeAt(0) * 7, 0) + (MOOD === 'shadow' ? 5000 : MOOD === 'mega' ? 9000 : MOOD === 'future' ? 7000 : MOOD === 'past' ? 3000 : MOOD === 'mega-x' ? 11000 : MOOD === 'mega-y' ? 13000 : MOOD === 'gmax' ? 15000 : MOOD === 'mecha' ? 2000 : 0);
 const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-function motes(layer, count, typeObj, front) {
-  const host = $(layer);
-  for (let i = 0; i < count; i++) {
-    const m = document.createElement('div');
-    const [cls, color] = typeObj.mote;
-    m.className = 'mote ' + cls;
-    const s = 6 + rnd() * 13;
-    m.style.width = s + 'px'; m.style.height = s + 'px';
-    if (cls === 'm-ring') { m.style.borderColor = color; } else { m.style.background = color; }
-    m.style.left = (rnd() * 1880) + 'px'; m.style.top = (rnd() * 1040) + 'px';
-    m.style.opacity = .25 + rnd() * .5;
-    m.dataset.drift = 30 + rnd() * 70; m.dataset.dur = 7 + rnd() * 9;
-    host.appendChild(m);
+const SHADOW_MOTES = ['#9a5cff', '#c33cff', '#ff3b3b', '#6a3cff'];
+const FUTURE_MOTES = [['m-square', '#00f0ff'], ['m-hex', '#7df9ff'], ['m-square', '#ffe94d'], ['m-orb', '#38b6ff']];
+const PAST_MOTES = [['m-orb', '#ffb35c'], ['m-orb', '#ff7a3d'], ['m-orb', '#d8c9a3'], ['m-ring', '#ff9a3d']];
+const GMAX_MOTES = [['m-orb', '#ff5c8a'], ['m-orb', '#ff2e4d'], ['m-orb', '#ff8ab0'], ['m-ring', '#ff2e4d']];
+function typeMote(i) { return MOOD === 'shadow' ? ['m-orb', SHADOW_MOTES[i % 4]] : MOOD === 'future' ? FUTURE_MOTES[i % 4] : MOOD === 'past' ? PAST_MOTES[i % 4] : MOOD === 'gmax' ? GMAX_MOTES[i % 4] : (i % 3 === 2 ? sec : prim).mote; }
+function flowMote(host, opt) {
+  const m = document.createElement('div');
+  m.className = opt.cls;
+  m.style.width = opt.s + 'px'; m.style.height = opt.s + 'px';
+  if (opt.bg) m.style.background = opt.bg;
+  if (opt.border) m.style.borderColor = opt.border;
+  if (opt.shadow) m.style.boxShadow = opt.shadow;
+  const bx = rnd() * 1880, by = rnd() * 1040;
+  m.style.left = bx + 'px'; m.style.top = by + 'px';
+  m.style.opacity = opt.o;
+  const sp = opt.speed, up = sp * (0.82 + rnd() * 0.3);
+  m.dataset.flow = JSON.stringify({ bx, by, vx: sp * (rnd() * 0.6 - 0.3) * (opt.horiz ? 3 : 1), vy: opt.horiz ? (rnd() * 10 - 5) : -up, o: opt.o, twk: 1.5 + rnd() * 1.6 });
+  host.appendChild(m);
+  return m;
+}
+const backHost = $('#motesBack'), frontHost = $('#motesFront');
+/* layer 1: background specks ~40 px/s */
+for (let i = 0; i < 30; i++) {
+  const [, color] = typeMote(i);
+  flowMote(backHost, { cls: MOOD === 'future' ? 'mote m-square' : 'mote', s: 3 + rnd() * 4, bg: color, o: MOOD === 'future' ? .3 + rnd() * .3 : .22 + rnd() * .26, speed: MOOD === 'future' ? 55 + rnd() * 25 : 34 + rnd() * 14 });
+}
+/* layer 2: mid-ground type orbs/gems ~100 px/s */
+for (let i = 0; i < 22; i++) {
+  const [cls, color] = typeMote(i + 5);
+  const front = i >= 10;
+  flowMote(front ? frontHost : backHost, { cls: 'mote ' + cls, s: 8 + rnd() * 8, bg: cls === 'm-ring' ? null : color, border: cls === 'm-ring' ? color : null, shadow: front ? `0 0 14px 2px ${color}59` : null, o: (MEGA_MOODS.includes(MOOD) || MOOD === 'future') ? .55 + rnd() * .4 : .4 + rnd() * .45, speed: 85 + rnd() * 30 });
+}
+/* layer 3: foreground bokeh rushing past ~200 px/s */
+for (let i = 0; i < 7; i++) {
+  const [, color] = typeMote(i + 2);
+  flowMote(frontHost, { cls: 'bokeh', s: 46 + rnd() * 46, bg: `radial-gradient(circle, ${color} 0%, transparent 70%)`, o: .3 + rnd() * .22, speed: 175 + rnd() * 50 });
+}
+if (MOOD === 'shadow') {
+  /* drifting smog banks: big soft violet clouds crossing the frame */
+  for (let i = 0; i < 8; i++) {
+    flowMote(backHost, { cls: 'smoke', s: 210 + rnd() * 130, bg: 'radial-gradient(circle, rgba(96,36,170,.5) 0%, transparent 70%)', o: .5 + rnd() * .18, speed: 20 + rnd() * 14, horiz: true });
   }
 }
-motes('#motesBack', 15, prim, false);
-motes('#motesFront', 9, sec, true);
+if (MOOD === 'future') {
+  /* voltage sparks: fast, bright — Quark Drive static */
+  for (let i = 0; i < 9; i++) {
+    flowMote(frontHost, { cls: 'mote', s: 4 + rnd() * 3.5, bg: i % 3 === 2 ? '#ffffff' : '#ffe94d', shadow: '0 0 12px 2px rgba(255,220,60,.55)', o: .75 + rnd() * .25, speed: 250 + rnd() * 90 });
+  }
+}
+if (MOOD === 'past') {
+  /* ancient ash drifting sideways on hot wind */
+  for (let i = 0; i < 6; i++) {
+    flowMote(backHost, { cls: 'mote', s: 9 + rnd() * 8, bg: '#d8c9a3', o: .18 + rnd() * .14, speed: 34 + rnd() * 16, horiz: true });
+  }
+}
+if (MEGA_MOODS.includes(MOOD) && (C.heroes || []).length) {
+  /* energy surge: particles radiate outward from behind the hero, respawning at the core */
+  const h0 = C.heroes[0], cx = h0.x + h0.size / 2, cy = h0.y + h0.size / 2;
+  for (let i = 0; i < 12; i++) {
+    const m = document.createElement('div');
+    const color = BURSTC[MOOD].surge[i % 2];
+    m.className = 'mote';
+    const s = 7 + rnd() * 7;
+    m.style.width = s + 'px'; m.style.height = s + 'px'; m.style.background = color;
+    m.style.boxShadow = `0 0 14px 2px ${color}66`;
+    m.style.left = (cx - s / 2) + 'px'; m.style.top = (cy - s / 2) + 'px';
+    const resp = [];
+    for (let k = 0; k < 6; k++) {
+      const ang = rnd() * Math.PI * 2, spd = 130 + rnd() * 90, r0 = 30 + rnd() * 90;
+      resp.push({ ox: Math.cos(ang) * r0, oy: Math.sin(ang) * r0, vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd });
+    }
+    m.dataset.surge = JSON.stringify({ resp, R: 780, o: .55 + rnd() * .4 });
+    m.style.opacity = 0;
+    frontHost.appendChild(m);
+  }
+}
 
 /* ---------- heroes ---------- */
 const stage = $('#stageLayer');
 (C.heroes || []).forEach((h, i) => {
   const glow = document.createElement('div'); glow.className = 'heroGlow';
   const gw = h.size * 1.15;
-  glow.style.cssText = `left:${h.x + h.size/2 - gw/2}px; top:${h.y + h.size/2 - gw/2}px; width:${gw}px; height:${gw}px; background:radial-gradient(circle, ${(TYPES[h.glowType || C.world[0]]).mote[1]}55 0%, transparent 65%); opacity:0;`;
+  glow.style.cssText = `left:${h.x + h.size/2 - gw/2}px; top:${h.y + h.size/2 - gw/2}px; width:${gw}px; height:${gw}px; background:radial-gradient(circle, ${MOOD_GLOW[MOOD] || (TYPES[h.glowType || C.world[0]]).mote[1]}55 0%, transparent 65%); opacity:0;`;
   glow.id = 'glow' + i; stage.appendChild(glow);
   const pool = document.createElement('div'); pool.className = 'pool';
   pool.style.cssText = `left:${h.x + h.size*0.14}px; top:${h.y + h.size*0.86}px; width:${h.size*0.72}px; height:${h.size*0.13}px; background:radial-gradient(ellipse, rgba(0,0,0,.5), transparent 70%); opacity:0;`;
@@ -350,11 +482,70 @@ const capWrap = $('#capWrap');
 const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 window.__timelines = { main: tl };
 document.querySelectorAll('.aurora').forEach((a, i) => {
-  tl.to(a, { x: i % 2 ? -70 : 70, opacity: .34, duration: 9 + i * 2.5, yoyo: true, repeat: Math.ceil(DUR / (9 + i * 2.5)) - 1, ease: 'sine.inOut' }, 0);
+  const du = (7 + i * 1.7) * AMB.aurF * .55;
+  tl.to(a, { x: i % 2 ? -240 : 240, duration: du, yoyo: true, repeat: Math.max(0, Math.ceil(DUR / du) - 1), ease: 'sine.inOut' }, 0);
+  tl.to(a, { y: i % 2 ? 30 : -24, opacity: .64, duration: du * .8, yoyo: true, repeat: Math.max(0, Math.ceil(DUR / (du * .8)) - 1), ease: 'sine.inOut' }, 0);
 });
-document.querySelectorAll('.mote').forEach(m => {
-  const d = parseFloat(m.dataset.drift), du = parseFloat(m.dataset.dur);
-  tl.to(m, { y: -d, x: d * .3, duration: du, yoyo: true, repeat: Math.ceil(DUR / du) - 1, ease: 'sine.inOut' }, 0);
+document.querySelectorAll('.blob').forEach((b, i) => {
+  const R = 130 + i * 45, du = (6.5 + i * 1.9) * AMB.blobF;
+  const pts = [[R, R * .35], [R * .2, -R * .5], [-R * .8, -R * .25], [-R * .3, R * .45], [0, 0]];
+  let t = 0, k = 0;
+  while (t < DUR) { const p = pts[k % pts.length]; tl.to(b, { x: p[0], y: p[1], duration: du, ease: 'sine.inOut' }, t); t += du; k++; }
+  tl.to(b, { opacity: .72, duration: du * .7, yoyo: true, repeat: Math.max(0, Math.ceil(DUR / (du * .7)) - 1), ease: 'sine.inOut' }, 0);
+});
+document.querySelectorAll('.cloud').forEach((c, i) => {
+  const du = 11 + i * 1.3;
+  tl.to(c, { x: i % 2 ? -150 : 150, duration: du, yoyo: true, repeat: Math.max(0, Math.ceil(DUR / du) - 1), ease: 'sine.inOut' }, 0);
+});
+/* continuous flow: linear legs with frame-wrap sets, all precomputed */
+document.querySelectorAll('[data-flow]').forEach(m => {
+  const F = JSON.parse(m.dataset.flow);
+  const lox = -110 - F.bx, hix = 2030 - F.bx, loy = -110 - F.by, hiy = 1190 - F.by;
+  let t = 0, ox = 0, oy = 0;
+  while (t < DUR - 0.01) {
+    const tx = F.vx > 0 ? (hix - ox) / F.vx : F.vx < 0 ? (lox - ox) / F.vx : 1e9;
+    const ty = F.vy > 0 ? (hiy - oy) / F.vy : F.vy < 0 ? (loy - oy) / F.vy : 1e9;
+    const dtEvent = Math.min(tx, ty), dt = Math.min(dtEvent, DUR - t);
+    const nx = ox + F.vx * dt, ny = oy + F.vy * dt;
+    tl.to(m, { x: nx, y: ny, duration: dt, ease: 'none' }, t);
+    t += dt; ox = nx; oy = ny;
+    if (dt >= dtEvent - 1e-6 && t < DUR - 0.01) {
+      if (tx <= ty) ox = F.vx > 0 ? lox : hix; else oy = F.vy > 0 ? loy : hiy;
+      tl.set(m, { x: ox, y: oy }, t);
+    }
+  }
+  tl.to(m, { opacity: Math.max(.1, F.o - .2), duration: F.twk, yoyo: true, repeat: Math.max(0, Math.ceil(DUR / F.twk) - 1), ease: 'sine.inOut' }, 0);
+});
+/* mega surge: radial legs from the hero core, respawning */
+document.querySelectorAll('[data-surge]').forEach(m => {
+  const S = JSON.parse(m.dataset.surge);
+  let t = .5, k = 0;
+  tl.set(m, { x: S.resp[0].ox, y: S.resp[0].oy, opacity: 0 }, 0);
+  while (t < DUR - 0.05) {
+    const R = S.resp[k % S.resp.length];
+    if (k > 0) tl.set(m, { x: R.ox, y: R.oy, opacity: 0 }, t);
+    const r = Math.hypot(R.ox, R.oy), spd = Math.hypot(R.vx, R.vy);
+    const dt = Math.min((S.R - r) / spd, DUR - t);
+    tl.to(m, { opacity: S.o, duration: Math.min(.3, dt * .4), ease: 'power1.out' }, t);
+    tl.to(m, { x: R.ox + R.vx * dt, y: R.oy + R.vy * dt, duration: dt, ease: 'none' }, t);
+    tl.to(m, { opacity: 0, duration: Math.min(.35, dt * .3), ease: 'power1.in' }, Math.max(t, t + dt - Math.min(.35, dt * .3)));
+    t += dt; k++;
+  }
+});
+document.querySelectorAll('.hexGrid').forEach(g => { tl.to(g, { opacity: .13, duration: 1.2 }, .2); tl.fromTo(g, { x: -34, y: -20 }, { x: 34, y: 20, duration: DUR, ease: 'none' }, 0); });
+/* MOOD mega: aura burst pulses + slow starburst rotation */
+document.querySelectorAll('.starburst').forEach(sb => {
+  tl.to(sb, { opacity: .95, duration: 1.2 }, .3);
+  tl.to(sb, { rotation: 14 * DUR, duration: DUR, ease: 'none' }, 0);
+});
+document.querySelectorAll('.burstRing').forEach((r, i) => {
+  const period = 2.6 + i * .9;
+  let t = .8 + i * .8;
+  while (t < DUR) {
+    tl.fromTo(r, { scale: .8, opacity: 0 }, { scale: 1.5, opacity: .5, duration: 1.3, ease: 'power2.out' }, t);
+    tl.to(r, { opacity: 0, duration: .55, ease: 'power1.in' }, t + .85);
+    t += period;
+  }
 });
 if (C.formLabel) tl.to('#formChip', { opacity: 1, duration: .5 }, 0.15);
 tl.to('#brandChip', { opacity: 1, duration: .5 }, 0.3);
@@ -363,6 +554,9 @@ tl.to('#brandChip', { opacity: 1, duration: .5 }, 0.3);
   const plate = '#hero' + i;
   tl.fromTo(plate, { opacity: 0, scale: .92, y: 26 }, { opacity: 1, scale: 1, y: 0, duration: .55, ease: 'back.out(1.6)' }, h.in);
   tl.to('#glow' + i, { opacity: .85, duration: .6 }, h.in + .1);
+  if (MEGA_MOODS.includes(MOOD)) tl.to('#glow' + i, { opacity: .5, scale: 1.13, duration: 1.3, yoyo: true, repeat: Math.max(0, Math.ceil((DUR - h.in) / 1.3) - 1), ease: 'sine.inOut' }, h.in + .8);
+  if (MOOD === 'future') tl.to('#glow' + i, { opacity: .45, scale: 1.09, duration: 2.0, yoyo: true, repeat: Math.max(0, Math.ceil((DUR - h.in) / 2.0) - 1), ease: 'sine.inOut' }, h.in + .8);
+  if (MOOD === 'shadow') tl.to('#glow' + i, { opacity: .55, duration: 2.4, yoyo: true, repeat: Math.max(0, Math.ceil((DUR - h.in) / 2.4) - 1), ease: 'sine.inOut' }, h.in + .8);
   tl.to('#pool' + i, { opacity: 1, duration: .6 }, h.in + .1);
   if (h.silUntil) tl.to(plate + ' .silImg', { opacity: 0, duration: .35 }, h.silUntil);
   if (h.idle) {
@@ -429,6 +623,11 @@ if (C.nameBlock) {
   tl.fromTo('#chip' + i, { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: .3, ease: 'back.out(2.6)' }, ch.at);
   if (ch.out) tl.to('#chip' + i, { opacity: 0, duration: .3 }, ch.out);
 });
+if (C.loadBar) {
+  tl.fromTo('#loadBar', { opacity: 0 }, { opacity: 1, duration: .3 }, C.loadBar.at);
+  tl.fromTo('#loadFill', { scaleX: 0 }, { scaleX: 1, duration: Math.max(.5, C.loadBar.out - C.loadBar.at - .4), ease: 'power1.inOut' }, C.loadBar.at + .15);
+  tl.to('#loadBar', { opacity: 0, duration: .35 }, C.loadBar.out);
+}
 if (C.quoteCard) {
   tl.fromTo('#quoteCard', { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .45, ease: 'back.out(1.5)' }, C.quoteCard.at);
   tl.to('#quoteCard', { opacity: 0, duration: .4 }, C.quoteCard.out);
@@ -454,13 +653,27 @@ if (C.statAnim) {
   tl.to('#clip' + i, { opacity: 1, duration: .3 }, cl.at);
   if (cl.mode === 'full') tl.to('#clipVeil', { opacity: 1, duration: .3 }, cl.at);
   if (cl.mode === 'full' || cl.hideHud) {
-    /* keep footage clean: series HUD (name block, heroes) steps aside */
+    /* keep footage clean: series HUD (name block, heroes) steps aside.
+       Scoped per hero: only heroes whose window overlaps the clip hide/restore.
+       A blanket restore resurrects heroes that have not entered yet (s0 hook bug:
+       Iron Thorns + Mega plates forced visible during Pupitar's window). */
     tl.to('#nameBlock', { opacity: 0, duration: .3 }, cl.at);
-    document.querySelectorAll('.heroPlate, .heroGlow, .pool').forEach(el => tl.to(el, { opacity: 0, duration: .3 }, cl.at));
+    const affected = (C.heroes || []).map((h, hi) => ({ h, hi })).filter(({ h }) => h.in < cl.at + cl.dur && (h.out ?? DUR) > cl.at);
+    affected.forEach(({ hi }) => {
+      ['#hero' + hi, '#glow' + hi, '#pool' + hi].forEach(sel => tl.to(sel, { opacity: 0, duration: .3 }, cl.at));
+    });
     tl.to('#nameBlock', { opacity: 1, duration: .35 }, cl.at + cl.dur + .05);
-    document.querySelectorAll('.heroPlate').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
-    document.querySelectorAll('.heroGlow').forEach(el => tl.to(el, { opacity: .85, duration: .35 }, cl.at + cl.dur + .05));
-    document.querySelectorAll('.pool').forEach(el => tl.to(el, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05));
+    affected.forEach(({ h, hi }) => {
+      if (h.in > cl.at && h.in < cl.at + cl.dur) {
+        tl.to('#hero' + hi, { opacity: 0, duration: .05, overwrite: 'auto' }, h.in + .02);
+        tl.to('#glow' + hi, { opacity: 0, duration: .05, overwrite: 'auto' }, h.in + .12);
+      }
+      if ((h.out ?? DUR) > cl.at + cl.dur) {
+        tl.to('#hero' + hi, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05);
+        tl.to('#glow' + hi, { opacity: .85, duration: .35 }, cl.at + cl.dur + .05);
+        tl.to('#pool' + hi, { opacity: 1, duration: .35 }, cl.at + cl.dur + .05);
+      }
+    });
   }
   if (cl.label) tl.to('#clipTag' + i, { opacity: 1, duration: .3 }, cl.at + .15);
   tl.to(st, { f: cl.frames - 1, duration: cl.dur, ease: 'none', onUpdate: () => {
