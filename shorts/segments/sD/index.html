@@ -653,7 +653,7 @@ if (C.formLabel) tl.to('#formChip', { opacity: 1, duration: .5 }, 0.15);
 if (C.nameBlock) {
   tl.fromTo('#nameBlock', { opacity: 0, scale: .7, y: 16 }, { opacity: 1, scale: 1.05, y: 0, duration: .38, ease: 'back.out(2.2)' }, C.nameBlock.at);
   tl.to('#nameBlock', { scale: 1, duration: .14, ease: 'power1.out' }, C.nameBlock.at + .38);
-  tl.fromTo('#popRing', { opacity: .75, scale: .93 }, { opacity: 0, scale: 1.045, duration: .65, ease: 'power2.out' }, C.nameBlock.at + .04);
+  tl.fromTo('#popRing', { opacity: .75, scale: .93 }, { opacity: 0, scale: 1.045, duration: .65, ease: 'power2.out', immediateRender: false }, C.nameBlock.at + .04);
   if (C.nameBlock.out) tl.to('#nameBlock', { opacity: 0, duration: .4 }, C.nameBlock.out);
   if (C.pillSwap) {
     tl.to('#pillRow .pillA', { opacity: 0, duration: .25 }, C.pillSwap.at);
