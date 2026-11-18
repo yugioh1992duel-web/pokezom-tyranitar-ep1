@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "0469ee56-ee4c-4386-bb13-b5292c049c99",
-  "currentRevision": null,
+  "currentRevision": "61d4c8fa-e718-4fed-be28-4f985ceb4615",
   "pendingChanges": false,
   "files": {
     "assets/Iron_Thorns.png": {
@@ -37,11 +37,27 @@
       "content": "/home/hatch/.cache/hyperframes/history/0469ee56-ee4c-4386-bb13-b5292c049c99/blobs/0b/0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b"
     },
     "index.html": {
-      "hash": "3d0e07cd29ce16dcf12ecd55a6cbb479a6e8b9fe4e5b93925a2f40a4f4b9ef0f",
-      "content": "/home/hatch/.cache/hyperframes/history/0469ee56-ee4c-4386-bb13-b5292c049c99/blobs/3d/3d0e07cd29ce16dcf12ecd55a6cbb479a6e8b9fe4e5b93925a2f40a4f4b9ef0f"
+      "hash": "9ede208ad1d746906115759c664d3dc6b80f4921c584187f4c52a5e824023284",
+      "content": "/home/hatch/.cache/hyperframes/history/0469ee56-ee4c-4386-bb13-b5292c049c99/blobs/9e/9ede208ad1d746906115759c664d3dc6b80f4921c584187f4c52a5e824023284"
     }
   },
-  "revisions": {},
+  "revisions": {
+    "61d4c8fa-e718-4fed-be28-4f985ceb4615": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794967191875,
+      "endedAt": 1794967191930,
+      "files": {
+        "index.html": {
+          "before": "/home/hatch/.cache/hyperframes/history/0469ee56-ee4c-4386-bb13-b5292c049c99/blobs/3d/3d0e07cd29ce16dcf12ecd55a6cbb479a6e8b9fe4e5b93925a2f40a4f4b9ef0f",
+          "after": "/home/hatch/.cache/hyperframes/history/0469ee56-ee4c-4386-bb13-b5292c049c99/blobs/9e/9ede208ad1d746906115759c664d3dc6b80f4921c584187f4c52a5e824023284"
+        }
+      }
+    }
+  },
   "checks": {
     "latest": null,
     "revisions": {},
@@ -54,13 +70,15 @@
   },
   "renders": {
     "latest": {
-      "id": "e04440ff-955c-42de-96bf-3ec796c299ec",
-      "completedAt": 1794964283958,
-      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sC/renders/sC_2026-11-18_01-03-06.mp4",
+      "id": "51c09e1d-d01d-431e-ac8a-a223c34ab3c1",
+      "completedAt": 1794967687389,
+      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sC/renders/sC_2026-11-18_01-59-50.mp4",
       "status": "completed",
-      "revision": null
+      "revision": "61d4c8fa-e718-4fed-be28-4f985ceb4615"
     },
-    "retainedRevisions": []
+    "retainedRevisions": [
+      "61d4c8fa-e718-4fed-be28-4f985ceb4615"
+    ]
   },
   "pendingArtifactCleanup": []
 }

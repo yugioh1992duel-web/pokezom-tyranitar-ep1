@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "bef5978f-8848-496c-9499-c13c04ce3fdf",
-  "currentRevision": null,
+  "currentRevision": "66c9f9eb-49d1-42c9-9241-ed510ee34c54",
   "pendingChanges": false,
   "files": {
     "assets/Mega_Tyranitar.png": {
@@ -29,11 +29,27 @@
       "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/0b/0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b"
     },
     "index.html": {
-      "hash": "ae7ef4cd3ab3d1f5458d44a38854cef299a62659988c247c4deabcc4340c9da9",
-      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/ae/ae7ef4cd3ab3d1f5458d44a38854cef299a62659988c247c4deabcc4340c9da9"
+      "hash": "778426006289ce3d1eb5d7baaf99466da58e8300dc29abba13b57d2d0f36ff4f",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/77/778426006289ce3d1eb5d7baaf99466da58e8300dc29abba13b57d2d0f36ff4f"
     }
   },
-  "revisions": {},
+  "revisions": {
+    "66c9f9eb-49d1-42c9-9241-ed510ee34c54": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794966265383,
+      "endedAt": 1794966265440,
+      "files": {
+        "index.html": {
+          "before": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/ae/ae7ef4cd3ab3d1f5458d44a38854cef299a62659988c247c4deabcc4340c9da9",
+          "after": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/77/778426006289ce3d1eb5d7baaf99466da58e8300dc29abba13b57d2d0f36ff4f"
+        }
+      }
+    }
+  },
   "checks": {
     "latest": null,
     "revisions": {},
@@ -46,13 +62,15 @@
   },
   "renders": {
     "latest": {
-      "id": "eb3437b6-502c-499b-9fba-0964b82594db",
-      "completedAt": 1794963783380,
-      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sB/renders/sB_2026-11-18_00-54-51.mp4",
+      "id": "e767ecbc-ad6f-4df7-9a5c-900e6e011f81",
+      "completedAt": 1794967187410,
+      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sB/renders/sB_2026-11-18_01-51-41.mp4",
       "status": "completed",
-      "revision": null
+      "revision": "66c9f9eb-49d1-42c9-9241-ed510ee34c54"
     },
-    "retainedRevisions": []
+    "retainedRevisions": [
+      "66c9f9eb-49d1-42c9-9241-ed510ee34c54"
+    ]
   },
   "pendingArtifactCleanup": []
 }
