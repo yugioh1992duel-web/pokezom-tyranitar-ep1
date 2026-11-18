@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "historyId": "67de5117-eab0-4e5d-b79e-2b35932771ee",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/Mega_Tyranitar.png": {
+      "hash": "bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e",
+      "content": "/home/hatch/.cache/hyperframes/history/67de5117-eab0-4e5d-b79e-2b35932771ee/blobs/bd/bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e"
+    },
+    "assets/Mega_Tyranitar_sil.png": {
+      "hash": "0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757",
+      "content": "/home/hatch/.cache/hyperframes/history/67de5117-eab0-4e5d-b79e-2b35932771ee/blobs/04/0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757"
+    },
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/home/hatch/.cache/hyperframes/history/67de5117-eab0-4e5d-b79e-2b35932771ee/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b",
+      "content": "/home/hatch/.cache/hyperframes/history/67de5117-eab0-4e5d-b79e-2b35932771ee/blobs/0b/0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b"
+    },
+    "index.html": {
+      "hash": "a5b09775af0097ddcdee09b1118b80a93851df4beb74fac66b4d4626c5e3b9e3",
+      "content": "/home/hatch/.cache/hyperframes/history/67de5117-eab0-4e5d-b79e-2b35932771ee/blobs/a5/a5b09775af0097ddcdee09b1118b80a93851df4beb74fac66b4d4626c5e3b9e3"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "6a9f97b7-6c18-4311-bc06-6dfc68d6414a",
+      "completedAt": 1794964399906,
+      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sD/renders/sD_2026-11-18_01-11-26.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}

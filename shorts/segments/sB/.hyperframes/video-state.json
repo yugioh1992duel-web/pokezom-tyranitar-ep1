@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "historyId": "bef5978f-8848-496c-9499-c13c04ce3fdf",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/Mega_Tyranitar.png": {
+      "hash": "bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/bd/bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e"
+    },
+    "assets/Mega_Tyranitar_sil.png": {
+      "hash": "0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/04/0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757"
+    },
+    "assets/Shadow_Tyranitar.png": {
+      "hash": "24e515c2e2f086e6b14cea46f40270a7f4db777ac0c3fc795d38fa7140a85f03",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/24/24e515c2e2f086e6b14cea46f40270a7f4db777ac0c3fc795d38fa7140a85f03"
+    },
+    "assets/Shadow_Tyranitar_sil.png": {
+      "hash": "1deb10a8f99afe3141e9372d4ea8399f12b22edbcf0544c43242c5475b8e90ff",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/1d/1deb10a8f99afe3141e9372d4ea8399f12b22edbcf0544c43242c5475b8e90ff"
+    },
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/0b/0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b"
+    },
+    "index.html": {
+      "hash": "ae7ef4cd3ab3d1f5458d44a38854cef299a62659988c247c4deabcc4340c9da9",
+      "content": "/home/hatch/.cache/hyperframes/history/bef5978f-8848-496c-9499-c13c04ce3fdf/blobs/ae/ae7ef4cd3ab3d1f5458d44a38854cef299a62659988c247c4deabcc4340c9da9"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "eb3437b6-502c-499b-9fba-0964b82594db",
+      "completedAt": 1794963783380,
+      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sB/renders/sB_2026-11-18_00-54-51.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}

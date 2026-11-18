@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "historyId": "55ac9d9a-d1ab-4947-8226-0f216bcbfab2",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/Iron_Thorns.png": {
+      "hash": "a02f41e751c4e800beb015bf8f5fb19ba20e5cf7d96b51408105b70c3cdfa5c0",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/a0/a02f41e751c4e800beb015bf8f5fb19ba20e5cf7d96b51408105b70c3cdfa5c0"
+    },
+    "assets/Iron_Thorns_sil.png": {
+      "hash": "fcad2737e99202b67282269912bc67797794c0f33f2112a2d0d9c1e72aedc812",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/fc/fcad2737e99202b67282269912bc67797794c0f33f2112a2d0d9c1e72aedc812"
+    },
+    "assets/Larvitar.png": {
+      "hash": "039b59954f367512f353180fc5d040592c5bdf0c4bd5f2d5f7d0ba3660a3dcc8",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/03/039b59954f367512f353180fc5d040592c5bdf0c4bd5f2d5f7d0ba3660a3dcc8"
+    },
+    "assets/Larvitar_sil.png": {
+      "hash": "67b7622473475ad2d53f73dad3017e045f57487afc8d0472bbdd59d5b33496bb",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/67/67b7622473475ad2d53f73dad3017e045f57487afc8d0472bbdd59d5b33496bb"
+    },
+    "assets/Mega_Tyranitar.png": {
+      "hash": "bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/bd/bd1bb69fb795a8c1a4de4d2e2cd18de4dac1e62ef00c6f36fc7fbc46a5e9594e"
+    },
+    "assets/Mega_Tyranitar_sil.png": {
+      "hash": "0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/04/0492cb47bb7e042c852b3c8199c5da026e3cbf130c7d8052513bd97a953f2757"
+    },
+    "assets/Pupitar.png": {
+      "hash": "36f961e70e3bca2cbed61b6b51c03e387d46903789a110d582c329733eb6b756",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/36/36f961e70e3bca2cbed61b6b51c03e387d46903789a110d582c329733eb6b756"
+    },
+    "assets/Pupitar_sil.png": {
+      "hash": "ccc7600202ab30d850d708d2a40c2052e57fefe80915849fe9eeaf6ac6452c63",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/cc/ccc7600202ab30d850d708d2a40c2052e57fefe80915849fe9eeaf6ac6452c63"
+    },
+    "assets/Shadow_Tyranitar.png": {
+      "hash": "24e515c2e2f086e6b14cea46f40270a7f4db777ac0c3fc795d38fa7140a85f03",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/24/24e515c2e2f086e6b14cea46f40270a7f4db777ac0c3fc795d38fa7140a85f03"
+    },
+    "assets/Shadow_Tyranitar_sil.png": {
+      "hash": "1deb10a8f99afe3141e9372d4ea8399f12b22edbcf0544c43242c5475b8e90ff",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/1d/1deb10a8f99afe3141e9372d4ea8399f12b22edbcf0544c43242c5475b8e90ff"
+    },
+    "assets/Tyranitar.png": {
+      "hash": "89e8e8f172f0abb1e7ab104771128bdc025f57e92c597bcafa1bb49b2cf3d130",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/89/89e8e8f172f0abb1e7ab104771128bdc025f57e92c597bcafa1bb49b2cf3d130"
+    },
+    "assets/Tyranitar_sil.png": {
+      "hash": "73cce41c3b9ba2403614270e45f671816ca3ecb024709d20d64847f539fb72c7",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/73/73cce41c3b9ba2403614270e45f671816ca3ecb024709d20d64847f539fb72c7"
+    },
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/0b/0bf0b1930a08fb4d547a162dc784192925a9da7532fc56ae99e6db5a75b1e07b"
+    },
+    "index.html": {
+      "hash": "91434814161f2daca905c30de0be10a659b5a9a0a61c0387b87eb8adc819ec53",
+      "content": "/home/hatch/.cache/hyperframes/history/55ac9d9a-d1ab-4947-8226-0f216bcbfab2/blobs/91/91434814161f2daca905c30de0be10a659b5a9a0a61c0387b87eb8adc819ec53"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "02e7c7af-80a6-439e-b383-19cc43e03055",
+      "completedAt": 1794963288695,
+      "output": "/home/hatch/workspace/pokezom-tyranitar-ep1/shorts/segments/sA/renders/sA_2026-11-18_00-45-32.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}
